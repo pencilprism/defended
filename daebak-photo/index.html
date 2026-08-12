@@ -251,22 +251,20 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ── 오늘 접속자 수 (GoatCounter) ──── */
+  /* ── 누적 방문객 수 (GoatCounter) ──── */
+  var BASE_VISITORS = 10000;          // 개업 이후 누적분(고정 가산값)
   var visitors = null;
   (function fetchVisitors(){
     function give(n){ if(visitors === null) visitors = n; }
-    window.setTimeout(function(){ give(1000); }, 3000);  // 응답이 없어도 진행
-    var path = location.pathname.replace(/\/$/, "");   // 끝 슬래시 제거
-    var url  = "https://pencilprism.goatcounter.com/counter/" +
-               encodeURIComponent(path) + ".json?start=2026-08-01";
-    fetch(url)
+    window.setTimeout(function(){ give(BASE_VISITORS); }, 2000);  // 응답이 없어도 진행
+    // TOTAL = 사이트 전체 합계(대소문자 구분, 앞 슬래시 없음)
+    fetch("https://pencilprism.goatcounter.com/counter/TOTAL.json")
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(d){
-        if(!d){ give(1000); return; }
-        var n = parseInt(String(d.count).replace(/[^0-9]/g, ""), 10);
-        give(isNaN(n) ? 1000 : n + 1000);
+        var n = d ? parseInt(String(d.count).replace(/[^0-9]/g, ""), 10) : NaN;
+        give(isNaN(n) ? BASE_VISITORS : n + BASE_VISITORS);
       })
-      .catch(function(){ give(1000); });
+      .catch(function(){ give(BASE_VISITORS); });
   })();
 
   var busy  = true;
@@ -723,7 +721,7 @@
     { t:"PASSWD: ******",                        c:"wt",  d:420 },
     { t:"",                                      c:"wt",  d:80  },
     { t:"접속을 환영합니다.  마지막 접속 97/10/08 21:14",  c:"wt", d:300 },
-    { t:"지금까지 다녀가신 분은 {VISITORS}명입니다.",  c:"dm",  d:400 },
+    { t:"귀하는 {VISITORS}번째 방문객입니다.",    c:"dm",  d:400 },
     { t:"",                                      c:"wt",  d:120 },
     { t:"go DAEBAK",                             c:"yellow-cmd", d:520 }
   ];
