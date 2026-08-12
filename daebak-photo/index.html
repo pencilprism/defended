@@ -257,7 +257,7 @@
     function give(n){ if(visitors === null) visitors = n; }
     window.setTimeout(function(){ give(1); }, 3000);   // 응답이 없어도 진행
     var url = "https://pencilprism.goatcounter.com/counter/" +
-              encodeURIComponent(location.pathname) + ".json";
+              encodeURIComponent(location.pathname.replace(/\/$/, "")) + ".json";
     fetch(url)
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(d){
