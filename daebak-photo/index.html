@@ -251,6 +251,23 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ── 오늘 접속자 수 (GoatCounter) ──── */
+  var visitors = null;
+  (function fetchVisitors(){
+    function give(n){ if(visitors === null) visitors = n; }
+    window.setTimeout(function(){ give(1); }, 3000);   // 응답이 없어도 진행
+    var url = "https://pencilprism.goatcounter.com/counter/" +
+              encodeURIComponent(location.pathname) + ".json";
+    fetch(url)
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if(!d){ give(1); return; }
+        var n = parseInt(String(d.count).replace(/[^0-9]/g, ""), 10);
+        give(isNaN(n) ? 1 : n);
+      })
+      .catch(function(){ give(1); });
+  })();
+
   var busy  = true;
   var current = "MAIN";
   var connectedAt = null;
@@ -705,7 +722,7 @@
     { t:"PASSWD: ******",                        c:"wt",  d:420 },
     { t:"",                                      c:"wt",  d:80  },
     { t:"접속을 환영합니다.  마지막 접속 97/10/08 21:14",  c:"wt", d:300 },
-    { t:"오늘 접속하신 분은 47명입니다.",           c:"dm",  d:400 },
+    { t:"오늘 접속하신 분은 {VISITORS}명입니다.",     c:"dm",  d:400 },
     { t:"",                                      c:"wt",  d:120 },
     { t:"go DAEBAK",                             c:"yellow-cmd", d:520 }
   ];
@@ -731,10 +748,15 @@
       }
       var line = BOOT[i++];
       var cls = (line.c === "yellow-cmd") ? "hd" : line.c;
+      var text = line.t;
+      if(text.indexOf("{VISITORS}") !== -1){
+        if(visitors === null){ window.setTimeout(next, 60); i--; return; }
+        text = text.replace("{VISITORS}", visitors);
+      }
       var div = document.createElement("div");
       div.className = "tx";
       div.style.padding = "0 4px";
-      div.innerHTML = '<span class="' + cls + '">' + esc(line.t) + "&nbsp;</span>";
+      div.innerHTML = '<span class="' + cls + '">' + esc(text) + "&nbsp;</span>";
       bodyEl.appendChild(div);
       window.setTimeout(next, line.d);
     })();
