@@ -258,7 +258,7 @@
     window.setTimeout(function(){ give(1000); }, 3000);  // 응답이 없어도 진행
     var path = location.pathname.replace(/\/$/, "");   // 끝 슬래시 제거
     var url  = "https://pencilprism.goatcounter.com/counter/" +
-               encodeURIComponent(path) + ".json?total=1";
+               encodeURIComponent(path) + ".json?start=2026-08-01";
     fetch(url)
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(d){
