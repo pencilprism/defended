@@ -223,6 +223,16 @@
 .homepage footer .credits{color:#ffd84a;line-height:1.6;font-size:11px}
 .homepage footer .credits small{color:#aaa}
 .counter span span{display:inline;padding:0;margin:0;border:0;background:none}
+/* 오른쪽 작은 구름 (숨은 메모장) */
+.cloud-two{z-index:1}
+/* 대박 광고판 */
+.ad-board{background:#000;height:110px;overflow:hidden;white-space:nowrap;border-top:3px solid #333;border-bottom:3px solid #333;display:flex;align-items:center}
+.ad-track{display:inline-block;padding-left:100%;font:900 56px/1 Gulim,"Malgun Gothic",sans-serif;letter-spacing:2px;animation:adscroll 14s linear infinite}
+.ad-track span{text-shadow:0 0 6px currentColor,0 0 14px currentColor;animation:adblink 1s steps(2) infinite}
+.ad-track span:nth-child(odd){animation-delay:.5s}
+@keyframes adscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes adblink{50%{opacity:.55}}
+.paint-app.ad-app{height:auto}
 
 </style>
 </head>
@@ -271,11 +281,15 @@
     memo: { title: "대철_할일.txt - 메모장", icon: "▤", width: 520, x: 330, y: 70 },
     recycle: { title: "휴지통", icon: "♻", width: 570, x: 330, y: 100 },
     diary: { title: "막내_일기(2008).txt - 메모장", icon: "▤", width: 540, x: 360, y: 40 },
+    teaser: { title: "대박 광고판", icon: "▧", width: 1000, x: 0, y: 190 },
     nateon: { title: "정혁 - 대화", icon: "☻", width: 380, x: 560, y: 150 },
     mine: { title: "지뢰찾기", icon: "✹", width: 240, x: 420, y: 120 },
     fortune: { title: "오늘의 운세", icon: "☆", width: 400, x: 380, y: 140 },
     alert: { title: "알림", icon: "!", width: 360, x: 400, y: 220 },
   };
+
+  // 대박 광고판 (오른쪽 작은 구름 더블클릭)
+  var AD_TEXT = "★★★ 9월 23일 2부 예고! 대박 사건! 놓치지 마세요! ★★★";
 
   // 사진 안내 문구 (사장님·정혁 사진 아래)
   var PHOTO_NOTICE = "※ 원활한 미행 및 잠복 근무 및 완벽한 대역을 위하여 이목구비의 세부 설정은 실제와 다를 수 있습니다.";
@@ -561,6 +575,7 @@
     "호칭을 조심하십시오.\n예컨대, 검사님이 아니라 변호사님일 수도 있습니다.",
     "좋은 일을 하게 됩니다.\n보노보노와 프로보노의 차이를 알아두세요.",
     "건강운이 좋습니다.\n오르는 계단이 많을수록 보약입니다.",
+    "뜬구름 잡는 이야기는 그만.\n오른쪽 구름이 당신을 인도합니다.",
   ];
 
   /* ================= 상태 ================= */
@@ -635,6 +650,16 @@
           "</div>" +
           '<div class="flyer f3"><span class="sign-no">2008.07 · 오징어 다리 (막내 담당)</span><b>대박흥신소</b> <i>믿음!!신뢰!!의리!!</i>' + tabs([1, 4]) + '<span class="red-pen">사장님 : 두 개는 왜 뜯었어!! 종이값·복사비·테이프값 낭비!!</span></div>' +
           '<p class="sign-result">2008년 : 전단지 500장 → 첫날 전화 0통<br>2010년 : 홈페이지 오픈 (제작 : 전 막내 나진혁, 現 대박칼라사진관)<br><small>※ 2년 뒤 전단지 보고 전화 1통 옴!!</small></p></div>' +
+          '<div class="paint-palette">■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div></div>';
+      case "teaser":
+        var rainbow = ["#ff2a2a", "#ff8a00", "#ffe600", "#2bd62b", "#1e8fff", "#3b3bff", "#b04dff"];
+        var k = 0;
+        var colored = AD_TEXT.split("").map(function (ch) {
+          if (ch === " ") return " ";
+          return '<span style="color:' + rainbow[k++ % rainbow.length] + '">' + esc(ch) + "</span>";
+        }).join("");
+        return '<div class="paint-app ad-app">' + menu("파일(F)　편집(E)　보기(V)　그림(I)　색(C)　도움말(H)") +
+          '<div class="ad-board"><div class="ad-track">' + colored + "</div></div>" +
           '<div class="paint-palette">■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div></div>';
       case "diary":
         return '<div class="notepad-app">' + menu("파일(F)　편집(E)　서식(O)　보기(V)　도움말(H)") + "<pre>" + esc(DIARY_TEXT) + "</pre></div>";
@@ -1070,6 +1095,18 @@
     S.ctx = null;
     update();
   }
+  function fitAd() {
+    if (!desktop) return;
+    WIN.teaser.width = desktop.clientWidth;
+    S.pos.teaser = { x: 0, y: (S.pos.teaser && S.pos.teaser.y) || WIN.teaser.y };
+  }
+  function openAd() {
+    fitAd();
+    openWin("teaser");
+  }
+  window.addEventListener("resize", function () {
+    if (S.open.indexOf("teaser") >= 0) { fitAd(); update(); }
+  });
   function showAlert(key) {
     if (winEls.alert) { winEls.alert.remove(); delete winEls.alert; }
     S.alertKey = key;
@@ -1216,6 +1253,7 @@
     main.addEventListener("dblclick", function (e) {
       var ic = e.target.closest("[data-icon]");
       if (ic) openWin(ic.getAttribute("data-icon"));
+      if (e.target.closest(".cloud-two")) openAd();
     });
     main.addEventListener("submit", function (e) {
       e.preventDefault();
