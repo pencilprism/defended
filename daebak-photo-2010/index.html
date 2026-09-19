@@ -265,8 +265,9 @@
   .g .who{ font-weight:bold; }
   .g .when{ color:var(--ink2); font-size:11px; margin-left:6px; font-family:"Courier New",monospace; }
   .g .re{ color:var(--red); padding-left:18px; }
-  .g .re::before{ content:"└ 사장 : "; }
+  .g .re::before{ content:"└ 왕대박 : "; }
   .g .re.u{ color:#1a3fa0; } .g .re.u::before{ content:"└ " attr(data-who) " : "; }
+  .g .re.u[data-who="나진혁"]{ color:var(--red); }
   .g.secret{ color:#9a9288; font-style:italic; }
   .gform{ margin-top:14px; display:grid; grid-template-columns:120px 1fr auto; gap:8px; align-items:start; }
   .gform input,.gform textarea{ font:inherit; font-size:13px; width:100%; background:#fff; border:1px solid #b9ad98; padding:5px 7px; }
@@ -516,10 +517,13 @@
 
   /* ── 방명록 ── */
   var GUEST = [
+    { who:"큰절올려요", when:"10.08.19", msg:"와 차주한 학우는 사진관도 사진관 홈페이지도 빛내줘요!! 긴 세월에 바래지 않는 미모 그저 레전드… 직접 뵌 적은 없지만 차주한 어머님께 큰절을 올리고 갑니다.", rw:"그랜절후배", re:"저도 한참 후배라 직접 뵌 적은 없지만 어디선가 마주치면 바로 알아볼 것만 같은 선배님… 지금까지 선배님 어머님께 큰절 올릴 생각을 못한 저를 반성하며 그랜절 올립니다." },
     { who:"왕대박사진사", when:"10.08.19", msg:"저한테 사진 찍으신 손님들의 합격을 진심으로 기원하긴 합니다만 여기서 찍는다고 반드시 붙는다고 할 순 없습니다. 97년에도 이렇게 적었습니다. 하이텔 방명록에 남겨 주신 글들은 옛날 정보마당에 그대로 있습니다." },
     { who:"기자아님", when:"10.08.19", msg:"왕대박 사장님!!! 차주한 학우 변호사 되고도 여기 다시 와서 사진 찍었다는 게 사실인가요? 사실이라면 그 사진을 왜 안 걸어 주시나요?!" },
-    { who:"합격대박기원", when:"10.08.18", msg:"여기서 리트 만점자 사진을 찍었다는 게 사실인가요? 대박행진 어디까지…", rw:"리트의철벽", re:"리트 만점자 아직 없어… 미래에도 안 나올 거 같은데… 나오려나…" },
-    { who:"줄서기줄이기", when:"10.08.18", msg:"무슨 요일이 줄이 제일 짧을까요? 선배님들 꿀팁 기다립니다", rw:"직원", re:"요일보다 시간입니다. 점심시간 직후가 제일 한가합니다." },
+    { who:"합격대박기원", when:"10.08.18", msg:"여기서 리트 만점자 사진을 찍었다는 게 사실인가요? 대박행진 어디까지…", rw:"리트의철벽", re:"리트 만점자 아직 없어… 미래에도 안 나올 거 같은데… 나오려나…",
+      res:[ ["리트의방어벽", "뜬금포지만 리트 만점 차주한 변호사님이 도전해 주시면 좋겠다..."],
+            ["리트의철벽", "그분의 바쁨을 충분히 아시잖아요? 시험 칠 시간 없으실 듯+시험장 다른 학우들 집중 어려울 듯 ㅎㅎㅎ 그래도 그분이라면… 리트 도전은 무리 같은데 만점은 무리 같지 않은 느낌이… 부럽지도 않다!!!"] ] },
+    { who:"줄서기줄이기", when:"10.08.18", msg:"무슨 요일이 줄이 제일 짧을까요? 선배님들 꿀팁 기다립니다", rw:"나진혁", re:"요일보다 시간입니다. 점심시간 직후가 제일 한가합니다." },
     { who:"로스쿨1기", when:"10.08.18", msg:"선배들이 여기서 찍으면 붙는다던데 로스쿨도 해당되나요?", re:"사시든 로스쿨이든 사진은 같은 사진입니다. 붙는 건 보장 못 합니다. 잘 나오게는 찍습니다." },
     { who:"신림동지박령", when:"10.08.17", msg:"97년에 하이텔 방명록에 글 남겼던 사람입니다. 신림동9년차에서 10년차로 넘어갔었지만 그 해 합격해서 탈출했습니다. 대박칼라사진관에서 합격 기 받아가세요! 다만 동네에 정들어서 잠깐 탈출했다가 다시 돌아와 사진관 근처 살고 있어요. 오며가며 지나갈 때마다 감사한 마음입니다." },
     { who:"고시원302호", when:"10.08.16", msg:"97년에 벽에 걸린 사진 뜯어갔던 사람입니다. 13년 만에 자수하러 왔다가 증명사진 찍고 갑니다. 이번엔 안 뜯었습니다.", re:"압니다. 그때 글도 기억합니다. 액자에 나사 박은 뒤로는 아무도 못 뜯습니다." },
@@ -646,7 +650,7 @@
         '<p>87년 개업하던 날 카운터에 올려 둔 공책이 97년 하이텔 정보마당 방명록을 지나 여기까지 왔습니다. 공책과 정보마당 방명록은 그대로 있습니다.</p>' +
         '<div class="book"><p class="title serif">방 명 록</p>';
       GUEST.forEach(function(g){
-        h += '<p class="g' + (g.secret ? " secret" : "") + '"><span class="who">' + esc(g.who) + '</span><span class="when">' + g.when + '</span><br>' + esc(g.msg) + (g.re ? '<br><span class="re' + (g.rw ? ' u" data-who="' + esc(g.rw) : "") + '">' + esc(g.re) + '</span>' : "") + '</p>';
+        h += '<p class="g' + (g.secret ? " secret" : "") + '"><span class="who">' + esc(g.who) + '</span><span class="when">' + g.when + '</span><br>' + esc(g.msg) + (g.re ? '<br><span class="re' + (g.rw ? ' u" data-who="' + esc(g.rw) : "") + '">' + esc(g.re) + '</span>' : "") + (g.res ? g.res.map(function(r){ return '<br><span class="re u" data-who="' + esc(r[0]) + '">' + esc(r[1]) + '</span>'; }).join("") : "") + '</p>';
       });
       h += '</div>' +
         '<form class="gform" id="gform"><input name="who" maxlength="12" placeholder="이름" autocomplete="off" required><textarea name="msg" maxlength="200" placeholder="남기실 말씀" required></textarea><button class="btn" type="submit">남기기</button>' +
