@@ -233,6 +233,19 @@
 @keyframes adscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @keyframes adblink{50%{opacity:.55}}
 .paint-app.ad-app{height:auto}
+/* 지뢰찾기 난이도 + 얼굴 */
+.mine-menu{margin:-2px -2px 6px;display:flex;align-items:center;gap:4px}
+.mine-menu button{border:0;background:0 0;font:inherit;padding:1px 5px;cursor:pointer}
+.mine-menu button:hover{background:#316ac5;color:#fff}
+.mine-menu button.on,.mine-menu button.on:hover{border:1px inset #fff;background:#fff;color:#000;font-weight:700}
+.mine-face{display:grid;place-items:center;line-height:0}
+.mine-face svg{width:20px;height:20px}
+.f-head{fill:#ffe200;stroke:#000;stroke-width:1}
+.f-ink{fill:#000}
+.f-ink2{fill:#111}
+.f-line{fill:none;stroke:#000;stroke-width:1.3;stroke-linecap:round}
+.mine-msg{min-height:34px}
+.mine-best{margin:2px 0 0;font-size:10px;color:#333;text-align:center;border-top:1px solid #9a9a9a;padding-top:4px}
 
 </style>
 </head>
@@ -678,7 +691,12 @@
           '<div class="nate-log"><p class="sys">' + NATE_DATE + ' 오후 대화</p>' + log + '<p class="sys">정혁님이 로그아웃 하였습니다.</p></div>' +
           '<div class="nate-input"><input disabled placeholder="정혁님이 오프라인입니다."><button class="old-button" disabled>보내기</button></div></div>';
       case "mine":
-        return '<div class="mine-app"><div class="mine-top"><output data-m="left">010</output><button class="mine-face" data-act="mine-new" data-m="face">☺</button><output data-m="time">000</output></div><div class="mine-grid" data-m="grid"></div><p class="mine-msg" data-m="msg"></p></div>';
+        return '<div class="mine-app">' +
+          '<div class="app-menu mine-menu">게임(G)　' + LEVELS.map(function (lv, i) {
+            return '<button data-level="' + i + '">' + lv.name + "</button>";
+          }).join("　") + "</div>" +
+          '<div class="mine-top"><output data-m="left">010</output><button class="mine-face" data-act="mine-new" data-m="face" aria-label="새 게임"></button><output data-m="time">000</output></div>' +
+          '<div class="mine-grid" data-m="grid"></div><p class="mine-msg" data-m="msg"></p><p class="mine-best" data-m="best"></p></div>';
       case "fortune":
         return '<div class="fortune-app"><h3>☆ 오늘의 운세는 대박 ☆</h3><small>사장님이 매일 아침 보시는 프로그램</small>' +
           '<div class="fortune-card" data-h="fortune"></div><button class="old-button" data-act="fortune">운세 보기</button><p style="margin:8px 0 0;font-size:11px;color:#888">오늘의 행운 번호 : 8282</p></div>';
@@ -852,11 +870,39 @@
   }
 
   /* ================= 지뢰찾기 ================= */
-  var M = { rows: 9, cols: 9, mines: 10 };
+  // 난이도 : 칸 수와 지뢰 수만 바꾸면 됩니다
+  var LEVELS = [
+    { name: "초급", rows: 9, cols: 9, mines: 10 },
+    { name: "중급", rows: 16, cols: 16, mines: 40 },
+    { name: "고급", rows: 16, cols: 30, mines: 99 },
+  ];
+  var FACES = {
+    play: '<svg viewBox="0 0 20 20"><circle class="f-head" cx="10" cy="10" r="9"/><circle class="f-ink" cx="7" cy="8" r="1.5"/><circle class="f-ink" cx="13" cy="8" r="1.5"/><path class="f-line" d="M5.5 12.5a5 5 0 0 0 9 0"/></svg>',
+    lose: '<svg viewBox="0 0 20 20"><circle class="f-head" cx="10" cy="10" r="9"/><path class="f-line" d="M5 6l4 4M9 6l-4 4M11 6l4 4M15 6l-4 4"/><path class="f-line" d="M6 14.5a4.5 4.5 0 0 1 8 0"/></svg>',
+    win: '<svg viewBox="0 0 20 20"><circle class="f-head" cx="10" cy="10" r="9"/><path class="f-ink2" d="M3.5 7h5.2v2.4a2.6 2.6 0 0 1-5.2 0zM11.3 7h5.2v2.4a2.6 2.6 0 0 1-5.2 0zM8.7 7.6h2.6v.9H8.7z"/><path class="f-line" d="M6 13.5a5 5 0 0 0 8 0"/></svg>',
+  };
+  var M = { rows: 9, cols: 9, mines: 10, level: 0 };
+  // 최고 기록 : 이 컴퓨터(브라우저)에만 저장됩니다
+  var BEST_KEY = "daebak-office-mine-best-v1";
+  var best = (function () {
+    try { return JSON.parse(localStorage.getItem(BEST_KEY)) || {}; } catch (e) { return {}; }
+  })();
+  function saveBest() {
+    try { localStorage.setItem(BEST_KEY, JSON.stringify(best)); } catch (e) {}
+  }
+  function setLevel(i) {
+    var lv = LEVELS[i];
+    M.level = i; M.rows = lv.rows; M.cols = lv.cols; M.mines = lv.mines;
+    WIN.mine.width = lv.cols * 22 + 30;
+    mineReset();
+    update();
+  }
   function mineReset() {
     M.cells = [];
     for (var i = 0; i < M.rows * M.cols; i++) M.cells.push({ mine: false, open: false, flag: false, n: 0 });
-    M.started = false; M.over = false; M.won = false; M.time = 0; M.boom = -1;
+    M.started = false; M.over = false; M.won = false; M.time = 0; M.boom = -1; M.record = false;
+    var el = winEls.mine;
+    if (el) el.querySelector('[data-m="grid"]').style.gridTemplateColumns = "repeat(" + M.cols + ", 22px)";
     renderMine();
   }
   function neighbors(i) {
@@ -899,7 +945,12 @@
       if (cell.n === 0) neighbors(k).forEach(function (j) { if (!M.cells[j].open) stack.push(j); });
     }
     var closed = M.cells.filter(function (x) { return !x.open; }).length;
-    if (closed === M.mines) { M.over = true; M.won = true; }
+    if (closed === M.mines) {
+      M.over = true; M.won = true;
+      var prev = best[M.level];
+      M.record = prev === undefined || M.time < prev;
+      if (M.record) { best[M.level] = M.time; saveBest(); }
+    }
     renderMine();
   }
   function mineFlag(i) {
@@ -917,7 +968,10 @@
     var flags = M.cells.filter(function (c) { return c.flag; }).length;
     q("left").textContent = pad3(M.mines - flags);
     q("time").textContent = pad3(M.time);
-    q("face").textContent = M.won ? "★" : M.over ? "✖" : "☺";
+    q("face").innerHTML = M.won ? FACES.win : M.over ? FACES.lose : FACES.play;
+    Array.prototype.forEach.call(el.querySelectorAll("[data-level]"), function (b) {
+      b.classList.toggle("on", Number(b.getAttribute("data-level")) === M.level);
+    });
     q("grid").innerHTML = M.cells.map(function (c, i) {
       var cls = "", txt = "";
       if (c.open) {
@@ -927,8 +981,14 @@
       } else if (c.flag) txt = "⚑";
       return '<button data-cell="' + i + '" class="' + cls + '">' + txt + "</button>";
     }).join("");
-    q("msg").innerHTML = M.won ? "사장님 기록 갱신!!<br>(종전 기록 : 999초)"
-      : M.over ? "펑!! 사장님 오시기 전에<br>얼굴을 눌러 새 게임을 하십시오."
+    q("best").innerHTML = "최고 기록 : " + LEVELS.map(function (lv, i) {
+      return lv.name + " " + (best[i] === undefined ? "-" : best[i] + "초");
+    }).join("　·　");
+    q("msg").innerHTML = M.won
+      ? (M.record
+          ? "기록 갱신!! " + LEVELS[M.level].name + " " + M.time + "초<br>사장님께 자랑하십시오."
+          : "성공!! " + LEVELS[M.level].name + " " + M.time + "초<br>최고 기록은 " + best[M.level] + "초입니다.")
+      : M.over ? "펑!! 지뢰를 밟았습니다.<br>얼굴을 눌러 다시 하십시오."
       : "왼쪽 클릭 : 열기 / 오른쪽 클릭 : 깃발";
   }
   setInterval(function () {
@@ -1308,6 +1368,7 @@
       else if (a === "admin-off") { G.admin = false; G.status = ""; renderGuest(); }
       else if (a === "board-list") { HOME.post = null; renderHome(); }
       else if (a === "mine-new") mineReset();
+      if (t.closest("[data-level]")) setLevel(Number(t.closest("[data-level]").getAttribute("data-level")));
       else if (a === "fortune") {
         var r;
         do { r = Math.floor(Math.random() * FORTUNES.length); } while (r === S.fortune && FORTUNES.length > 1);
