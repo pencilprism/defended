@@ -151,6 +151,7 @@
     background:none; border:0; padding:2px 4px;
     font:inherit; color:var(--white); cursor:pointer;
   }
+  a.item{ text-decoration:none; }
   .item:hover, .item:focus-visible{ background:var(--cyan); color:#000060; outline:none; }
   .item .no{ color:var(--yellow); font-weight:bold; }
   .item:hover .no, .item:focus-visible .no{ color:#000060; }
@@ -266,6 +267,9 @@
       })
       .catch(function(){ give(BASE_VISITORS); });
   })();
+
+  /* ── 2010년 새 홈페이지 주소 (폴더명을 바꾸면 여기만 고치면 됩니다) ── */
+  var NEW_SITE = "../daebak-photo-2010/";
 
   var busy  = true;
   var current = "MAIN";
@@ -391,6 +395,7 @@
             menuBtn(4, "오시는 길") +
             menuBtn(5, "방명록") +
             menuBtn(6, "예약 안내") +
+            menuBtn(7, "홈페이지 이사 소식", "&lt;NEW&gt;") +
             '<button class="item" data-cmd="Q" type="button"><span class="no">Q.</span> 접속 종료</button>' +
           "</div>" +
           rule() +
@@ -534,6 +539,29 @@
           '<p class="tx">· 상의는 두 벌쯤 들고 오세요. 화면으로 같이 보고 고르는 편이 빠릅니다.<br>' +
           '· 앞머리는 그대로 두세요. 여기서 정리해 드립니다.<br>' +
           '· 여권사진은 귀와 눈썹이 보여야 합니다. 안경은 벗는 편을 권합니다.</p>';
+      }
+    },
+
+    "7": {
+      title:"홈페이지 이사 소식", sub:"7번 자료실",
+      render: function(){
+        return '<p class="tx"><span class="hd">[ 공 지 ]</span> <span class="pk">홈페이지가 이사했습니다</span></p>' +
+          rule() +
+          '<p class="tx"><span class="cy">시삽 왕대박사진사</span> <span class="dm">(99.03.02)</span></p>' +
+          '<p class="tx">정보마당 시절부터 찾아 주신 분들께 알립니다.' +
+          ' 동네에 초고속 인터넷이 들어왔다기에, 저희 사진관도' +
+          ' 인터넷 홈페이지를 하나 냈습니다. 제가 직접 만들었습니다.</p>' +
+          '<p class="tx">저는 이 화면이 더 익숙합니다만,' +
+          ' 요즘 젊은 분들은 이 화면을 못 읽는다고 합니다.</p>' +
+          '<p class="tx"><span class="dm">이 정보마당은 지우지 않고 그대로 둡니다.' +
+          ' 여기가 편하신 분은 계속 여기로 오십시오. 사진관 자리는 그대로입니다.</span></p>' +
+          rule() +
+          '<div class="menu">' +
+            '<a class="item" href="' + NEW_SITE + '"><span class="no">&gt;</span> 인터넷 홈페이지로 건너가기 <span class="tag">&lt;www&gt;</span></a>' +
+            '<button class="item" data-cmd="M" type="button"><span class="no">M.</span> 메인으로</button>' +
+          "</div>" +
+          rule() +
+          '<p class="tx"><span class="dm">전화는 그대로 019-1001-0684 입니다. 010으로 바꾸라는 전화가 자주 옵니다만 안 바꿉니다.</span></p>';
       }
     }
   };
@@ -783,6 +811,7 @@
   bodyEl.addEventListener("click", function(ev){
     var btn = ev.target.closest(".item");
     if(!btn) return;
+    if(btn.tagName === "A") return;   // 링크는 그대로 이동
     keyin.value = "";
     command(btn.getAttribute("data-cmd"));
     focusInput();
