@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대박칼라사진관 · 각종 증명사진 10분 완성 · since 1987</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="관악구 합격동 대박칼라사진관. 1987년 개업. 증명사진 · 여권사진 · 포토카드 · 옛날사진 복원.">
+<meta name="theme-color" content="#f3eee3">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="대박칼라사진관">
+<meta property="og:title" content="대박칼라사진관 · 각종 증명사진 10분 완성">
+<meta property="og:description" content="1987년부터 같은 자리, 같은 조명. 홈페이지 이사 왔습니다.">
+<meta property="og:locale" content="ko_KR">
+<style>
+  /* ────────────────────────────────────────────
+     2010년 8월. 사진관 사장님 취향으로 만든 조용한 홈페이지.
+     인화지 색 바탕, 얇은 선, 바탕체. 요란한 것 없이.
+     ──────────────────────────────────────────── */
+  :root{
+    --paper:#f3eee3;      /* 인화지 */
+    --paper2:#faf7f0;
+    --ink:#2a2622;
+    --ink2:#5d5650;
+    --line:#cfc6b6;
+    --red:#b5121b;        /* 봉투에 찍힌 빨강 */
+    --wall:#e6ded0;
+    --backdrop:#c9d6e3;   /* 증명사진 배경 */
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--paper);
+    background-image:radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px);
+    background-size:5px 5px;
+    color:var(--ink);
+    font-family:"굴림","Gulim","돋움","Dotum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:13px; line-height:1.75;
+    padding:26px 12px 40px;
+  }
+  .serif{ font-family:"바탕","Batang","나눔명조","NanumMyeongjo","Apple Myungjo",serif; }
+  a{ color:var(--ink); }
+  a:hover{ color:var(--red); }
+  p{ margin:0 0 10px; }
+  .muted{ color:var(--ink2); font-size:12px; }
+  .red{ color:var(--red); }
+  b{ font-weight:bold; }
+
+  .wrap{ max-width:780px; margin:0 auto; }
+
+  /* ── 간판 ─────────────────────────────── */
+  .sign{ text-align:center; padding:0 0 12px; }
+  .sign .since{ font-size:11px; letter-spacing:5px; color:var(--ink2); }
+  .sign h1{ margin:2px 0 0; font-size:34px; letter-spacing:10px; font-weight:normal; line-height:1.2; cursor:default; user-select:none; }
+  .sign h1 span{ color:var(--red); }
+  .sign .tag{ font-size:12px; letter-spacing:3px; color:var(--ink2); margin-top:2px; }
+
+  /* ── 쇼윈도(액자 벽) ───────────────────── */
+  .window{
+    position:relative; background:var(--wall);
+    background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.025) 0 1px, transparent 1px 28px);
+    border:1px solid var(--line); border-bottom:8px solid #b9ad98;
+    padding:22px 16px 14px; overflow:hidden;
+  }
+  .window::before{ content:""; position:absolute; left:0; right:0; top:0; height:10px; background:linear-gradient(rgba(0,0,0,.08), transparent); }
+  .rail{ position:absolute; left:14px; right:14px; top:12px; height:2px; background:#8f846f; }
+  .frames{ display:flex; justify-content:center; align-items:flex-end; gap:22px; flex-wrap:wrap; }
+  .fr{ position:relative; background:#fff; padding:7px 7px 18px; border:4px solid #4a3a2a; box-shadow:0 6px 10px rgba(0,0,0,.25), inset 0 0 0 1px #d9c9a8; text-align:center; }
+  .fr.gold{ border-color:#a8894a; }
+  .fr.thin{ border-width:2px; border-color:#333; }
+  .fr::before{ content:""; position:absolute; left:50%; top:-14px; width:1px; height:10px; background:#5a4d3c; }
+  .fr small{ position:absolute; left:0; right:0; bottom:3px; font-size:9px; color:#6b6157; letter-spacing:0; white-space:nowrap; }
+  .fr{ min-width:84px; }
+  .fr .lbl{ position:absolute; left:50%; bottom:-12px; transform:translateX(-50%); background:var(--red); color:#fff; font-size:9px; padding:0 6px; letter-spacing:1px; white-space:nowrap; }
+  .screw{ position:absolute; width:7px; height:7px; border-radius:50%; background:radial-gradient(circle at 40% 40%, #ddd, #666); box-shadow:0 0 0 1px #333; }
+  .screw::after{ content:""; position:absolute; left:1px; right:1px; top:3px; height:1px; background:#333; }
+  .screw.tl{ left:-6px; top:-6px; } .screw.tr{ right:-6px; top:-6px; } .screw.bl{ left:-6px; bottom:-6px; } .screw.br{ right:-6px; bottom:-6px; }
+  .window .note{ text-align:right; margin-top:12px; font-size:10px; color:#6b6157; }
+
+  /* CSS로 그린 증명사진 */
+  .photo{ position:relative; overflow:hidden; background:linear-gradient(var(--backdrop), #dde6ee 70%, #a9b8c8); width:66px; height:88px; }
+  .photo.w3545{ width:70px; height:90px; }
+  .photo.card{ width:62px; height:96px; background:linear-gradient(#d9d9d9,#ececec 70%,#b8b8b8); }
+  .photo.card .face{ top:30px; } .photo.card .hair{ top:22px; } .photo.card .hair.wavy{ top:14px; }
+  .photo.big{ width:150px; height:200px; }
+  .photo.big .face,.photo.big .hair,.photo.big .shirt{ transform:scale(2.2); }
+  .photo.big .face{ transform-origin:50% 0; top:44px; }
+  .photo.big .face.tilt{ transform:scale(2.2) rotate(-12deg); }
+  .photo.big .hair{ transform-origin:50% 0; top:26px; }
+  .photo.big .hair.side{ transform:scale(2.2) skewX(-8deg); }
+  .photo.big .shirt{ transform-origin:50% 100%; }
+  .photo.gray .face{ filter:grayscale(1) contrast(.9); }
+  .photo.sepia{ filter:sepia(.55) contrast(.9); }
+  .face{ position:absolute; left:50%; top:22px; width:34px; height:42px; margin-left:-17px; background:#e9be92; border-radius:46% 46% 44% 44%; z-index:1; }
+  .hair{ position:absolute; left:50%; top:16px; width:40px; height:20px; margin-left:-20px; background:#1c1511; border-radius:50% 50% 12% 12%; z-index:0; }
+  .hair.gray{ background:linear-gradient(#777,#aaa); height:15px; top:19px; }
+  .hair.side{ transform:skewX(-8deg); }
+  .hair.up{ height:26px; top:10px; border-radius:40% 60% 10% 10%; }
+  .hair.long{ height:56px; width:48px; margin-left:-24px; top:15px; border-radius:50% 50% 24% 24%; background:#3a2418; }
+  .hair.bob{ height:40px; width:46px; margin-left:-23px; top:15px; border-radius:50% 50% 30% 30%; background:#4a2a10; }
+  .hair.perm{ height:24px; width:48px; margin-left:-24px; top:12px; border-radius:50%; background:#5a3a20; }
+  .hair.cap{ background:#2b5bb0; height:18px; border-radius:50% 50% 8% 8%; }
+  .hair.black{ background:#151313; width:40px; margin-left:-20px; height:19px; top:15px; border-radius:60% 40% 22% 8%; transform:skewX(-6deg); }
+  .hair.wavy{ background:#7a5a3a; width:46px; margin-left:-23px; height:28px; top:8px; border-radius:50% 50% 30% 30%; box-shadow:-3px 6px 0 -2px #7a5a3a, 3px 6px 0 -2px #7a5a3a; }
+  .shirt.vest{ background:linear-gradient(90deg,#d6c6a4 0 34%,#fff 34% 66%,#d6c6a4 66%); border-top-color:#c9b890; }
+  .photo.big .hair.black{ transform:scale(2.2) skewX(-6deg); }
+  .eye{ position:absolute; top:16px; width:5px; height:5px; background:#222; border-radius:50%; }
+  .eye.l{ left:8px; } .eye.r{ right:8px; }
+  .eye.shut{ height:2px; border-radius:0; top:18px; }
+  .eye.squint{ height:2px; width:6px; border-radius:0 0 4px 4px; top:18px; }
+  .eye.side{ transform:translateX(3px); }
+  .eye.big{ width:7px; height:7px; }
+  .brow{ position:absolute; top:12px; width:7px; height:2px; background:#222; }
+  .brow.l{ left:7px; } .brow.r{ right:7px; }
+  .brow.thick{ height:3px; width:9px; }
+  .brow.up{ transform:rotate(-15deg); } .brow.r.up{ transform:rotate(15deg); }
+  .nose{ position:absolute; left:50%; top:22px; width:3px; height:6px; margin-left:-1px; border-right:1px solid #c48c5c; border-bottom:1px solid #c48c5c; border-radius:0 0 3px 0; }
+  .mouth{ position:absolute; left:50%; top:30px; width:11px; height:2px; margin-left:-5px; background:#a04a3a; border-radius:1px; }
+  .mouth.smile{ height:5px; background:transparent; border-bottom:2px solid #a04a3a; border-radius:0 0 8px 8px; }
+  .mouth.laugh{ width:14px; height:8px; margin-left:-7px; background:#8a2f2f; border-radius:0 0 8px 8px; }
+  .mouth.open{ width:7px; height:8px; margin-left:-3px; background:#8a2f2f; border-radius:50%; }
+  .mouth.frown{ height:5px; background:transparent; border-top:2px solid #a04a3a; border-radius:8px 8px 0 0; }
+  .cheek{ position:absolute; top:25px; width:7px; height:4px; background:rgba(255,120,120,.5); border-radius:50%; }
+  .cheek.l{ left:3px; } .cheek.r{ right:3px; }
+  .face.tilt{ transform:rotate(-12deg); }
+  .glasses{ position:absolute; top:14px; left:5px; width:24px; height:8px; border:1px solid #333; border-radius:4px; }
+  .glasses::after{ content:""; position:absolute; left:10px; top:3px; width:4px; height:1px; background:#333; }
+  .shirt{ position:absolute; left:50%; bottom:-8px; width:54px; height:24px; margin-left:-27px; background:#fff; border-radius:40% 40% 0 0; border-top:2px solid #ddd; z-index:2; }
+  .shirt::after{ content:""; position:absolute; left:50%; top:0; width:7px; height:10px; margin-left:-3px; background:#b33; clip-path:polygon(50% 0,100% 30%,60% 100%,40% 100%,0 30%); }
+  .shirt.notie::after{ display:none; }
+  .shirt.blue{ background:#cfe0ff; } .shirt.dark{ background:#2a3d66; } .shirt.pink{ background:#ffd6e7; } .shirt.green{ background:#cfe9d0; } .shirt.stripe{ background:repeating-linear-gradient(90deg,#fff 0 4px,#cfe0ff 4px 8px); } .shirt.suit{ background:#1d1d1d; }
+  .strand{ position:absolute; left:50%; top:6px; width:1.5px; height:12px; margin-left:8px; background:#1c1511; transform:rotate(12deg); transform-origin:50% 100%; z-index:1; border-radius:1px; }
+  .strand::after{ content:""; position:absolute; left:-1px; top:-3px; width:3px; height:3px; border-radius:50%; background:#1c1511; }
+  .photo.big .strand{ top:17px; height:9px; margin-left:16px; transform:scale(2.2) rotate(12deg); }
+  .flashfx{ position:absolute; inset:0; background:rgba(255,255,255,.5); z-index:3; }
+  .blur .face,.blur .hair,.blur .shirt{ filter:blur(1px); }
+
+  /* ── 메뉴 ─────────────────────────────── */
+  nav.menu{ display:flex; flex-wrap:wrap; justify-content:center; gap:0; margin:16px 0 0; padding:8px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font-size:13px; }
+  nav.menu button{ font:inherit; color:var(--ink); background:none; border:0; padding:2px 12px; cursor:pointer; position:relative; }
+  nav.menu button + button::before{ content:"|"; position:absolute; left:-2px; top:2px; color:var(--line); }
+  nav.menu button:hover{ color:var(--red); }
+  nav.menu button.on{ color:var(--red); text-decoration:underline; text-underline-offset:4px; }
+  .newgif{ display:inline-block; color:#fff; background:#e6007e; font-size:8px; font-weight:bold; padding:0 3px; line-height:12px; vertical-align:2px; margin-left:2px; animation:blink .5s steps(2) infinite; letter-spacing:0; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ── 상단 정보줄 (필름 카운터 / 전화) ── */
+  .infobar{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 4px 0; flex-wrap:wrap; font-size:12px; color:var(--ink2); }
+  .counter{ display:inline-flex; align-items:center; gap:8px; }
+  .counter .win{ display:inline-block; background:#111; color:#f4e2a0; font-family:"Courier New",monospace; font-size:13px; letter-spacing:2px; padding:1px 8px; border:2px solid #444; border-radius:3px; box-shadow:inset 0 0 6px #000; }
+  .tel{ font-family:"Courier New",monospace; font-size:14px; letter-spacing:1px; color:var(--red); font-weight:bold; }
+
+  /* ── 본문 ─────────────────────────────── */
+  main{ background:var(--paper2); border:1px solid var(--line); padding:24px 28px 28px; margin-top:16px; }
+  h2{ margin:0 0 16px; font-size:18px; font-weight:normal; letter-spacing:2px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  h2 small{ font-size:11px; letter-spacing:1px; color:var(--ink2); margin-left:8px; font-family:"굴림","Gulim",sans-serif; }
+  h3{ margin:22px 0 8px; font-size:14px; font-weight:bold; letter-spacing:1px; }
+  h3::before{ content:"■ "; color:var(--red); font-size:9px; vertical-align:2px; }
+
+  .greet{ display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start; }
+  .greet .pic{ padding:8px 8px 24px; background:#fff; border:1px solid #ccc; box-shadow:1px 2px 4px rgba(0,0,0,.15); position:relative; }
+  .greet .pic small{ position:absolute; left:0; right:0; bottom:5px; text-align:center; font-size:10px; color:#777; }
+  .greet .txt{ font-size:14px; line-height:1.9; }
+  .greet .txt .lead{ font-size:17px; margin-bottom:8px; }
+
+  table.list{ width:100%; border-collapse:collapse; font-size:13px; }
+  .list td{ padding:6px 4px; border-bottom:1px dotted var(--line); vertical-align:top; }
+  .list td.d{ width:66px; color:var(--ink2); font-size:12px; white-space:nowrap; font-family:"Courier New",monospace; }
+  .list td.w{ width:56px; color:var(--ink2); font-size:12px; text-align:right; }
+  .list button.link{ font:inherit; background:none; border:0; padding:0; color:var(--ink); cursor:pointer; text-align:left; }
+  .list button.link:hover{ color:var(--red); text-decoration:underline; }
+  .list tr.pin td{ background:#f6f0e0; }
+
+  .post{ background:#fff; border:1px solid var(--line); padding:18px 22px; }
+  .post h4{ margin:0 0 4px; font-size:16px; font-weight:normal; }
+  .post .meta{ font-size:11px; color:var(--ink2); border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:12px; }
+  .post .body{ white-space:pre-wrap; line-height:1.9; font-size:13.5px; }
+  .btn{ font:inherit; font-size:12px; color:var(--ink); background:#fff; border:1px solid #8c8378; padding:4px 14px; cursor:pointer; }
+  .btn:hover{ border-color:var(--red); color:var(--red); }
+  .btn.primary{ background:var(--red); color:#fff; border-color:var(--red); }
+  .right{ text-align:right; margin-top:10px; }
+
+  table.spec{ width:100%; border-collapse:collapse; font-size:13px; background:#fff; }
+  .spec th,.spec td{ border:1px solid var(--line); padding:7px 10px; text-align:left; }
+  .spec th{ background:#efe8d8; font-weight:normal; width:110px; }
+  .spec td.c{ font-family:"Courier New",monospace; text-align:center; width:110px; }
+  .spec tr.hi td,.spec tr.hi th{ background:#fbf3df; }
+
+  .envelope-text{ background:#fff; border:1px solid var(--line); padding:14px 16px; text-align:center; line-height:1.9; font-size:13px; }
+  .envelope-text .nm{ font-size:17px; letter-spacing:5px; }
+  .envelope-text .tel2{ color:var(--red); font-weight:bold; letter-spacing:1px; }
+
+  .people{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px; }
+  .person{ display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; }
+  .person .pic{ background:#fff; padding:5px; border:1px solid #ccc; }
+  .person b{ display:block; margin-bottom:2px; }
+  .person .muted{ line-height:1.6; }
+
+  /* 복원 전후 */
+  .restore{ display:flex; gap:18px; align-items:center; justify-content:center; flex-wrap:wrap; margin:6px 0 4px; }
+  .restore .pic{ background:#fff; padding:6px 6px 16px; border:1px solid #ccc; position:relative; }
+  .restore .pic small{ position:absolute; left:0; right:0; bottom:2px; text-align:center; font-size:10px; color:#777; }
+  .restore .photo{ width:130px; height:100px; }
+  .restore .old .photo{ background:linear-gradient(#d8c9a3,#efe3c3 70%,#b5a47a); filter:sepia(.7) contrast(.75) brightness(.95); }
+  .restore .old .photo::after{ content:""; position:absolute; left:52%; top:-10%; width:3px; height:120%; background:rgba(255,255,255,.8); transform:rotate(8deg); }
+  .restore .old .photo::before{ content:""; position:absolute; right:-8px; bottom:-8px; width:46px; height:46px; background:radial-gradient(circle,rgba(120,80,20,.55),transparent 70%); z-index:4; }
+  .restore .arrow{ color:var(--ink2); font-size:20px; }
+  .restore .face.a{ left:32%; } .restore .face.b{ left:68%; }
+  .restore .hair.a{ left:32%; } .restore .hair.b{ left:68%; }
+
+  /* ── B컷 봉투 (굿즈 실물 기준: 크라프트 세로 봉투) ── */
+  .env-area{ display:grid; grid-template-columns:1fr; justify-items:center; gap:18px; padding:0 0 10px; }
+  .envelope{ position:relative; width:230px; height:330px; margin-top:150px; user-select:none; }
+  .envelope .back{ position:absolute; left:0; right:0; bottom:0; height:274px; background:#c8b38b; border:1px solid #a8946c; }
+  .envelope .pocket{
+    position:absolute; left:0; right:0; bottom:0; height:274px; z-index:3;
+    background:#cdb892;
+    background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.025) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 4px);
+    border:1px solid #a8946c; border-top:0;
+    padding:16px 14px 0; color:#2a2622; text-align:center; font-family:"굴림","Gulim",sans-serif;
+  }
+  .envelope .pocket .to{ display:flex; align-items:flex-end; gap:6px; border-bottom:1px solid #2a2622; margin:0 10px 22px; padding-bottom:3px; height:26px; }
+  .envelope .pocket .to span{ flex:1; }
+  .envelope .pocket .to i{ font-style:normal; font-size:12px; letter-spacing:1px; }
+  .envelope .pocket .kinds{ font-size:11px; font-weight:bold; line-height:1.6; letter-spacing:.5px; }
+  .envelope .pocket .nm{ font-size:22px; font-weight:900; letter-spacing:1px; margin:16px 0 14px; font-family:"굴림","Gulim","Malgun Gothic",sans-serif; font-style:italic; transform:skewX(-10deg); display:inline-block; }
+  .envelope .pocket .li{ font-size:11px; font-weight:bold; line-height:1.9; }
+  .envelope .pocket .t{ position:absolute; left:0; right:0; bottom:14px; font-size:11px; font-weight:bold; line-height:1.6; }
+  .envelope .flap{
+    position:absolute; left:0; right:0; top:0; height:72px; z-index:4;
+    background:linear-gradient(#bda67c, #c6b189); border:1px solid #a8946c; border-bottom:0;
+    clip-path:polygon(0 100%, 3% 55%, 12% 0, 88% 0, 97% 55%, 100% 100%);
+    transform-origin:50% 100%; transition:transform .5s ease;
+  }
+  .envelope .flap::after{ content:""; position:absolute; left:10%; right:10%; bottom:0; height:1px; background:rgba(0,0,0,.12); }
+  .envelope.open .flap{ transform:scaleY(-1); z-index:1; }
+  .envelope .tap{ position:absolute; left:0; right:0; top:22px; text-align:center; font-size:10px; color:#6b5f48; letter-spacing:1px; z-index:5; }
+  .envelope.open .tap{ display:none; }
+  .envelope .card{ position:absolute; left:50%; top:70px; width:150px; margin-left:-75px; background:#fff; padding:6px 6px 26px; border:1px solid #ccc; box-shadow:0 2px 6px rgba(0,0,0,.25); transition:transform .6s ease .3s, visibility 0s linear .3s; z-index:2; visibility:hidden; -webkit-backface-visibility:hidden; }
+  .envelope .card small{ position:absolute; left:0; right:0; bottom:6px; text-align:center; font-size:10px; color:#777; }
+  .envelope .card .stamp{ position:absolute; right:8px; bottom:30px; color:#666; border:2px double #666; padding:0 5px; font-size:10px; font-weight:bold; transform:rotate(-10deg); background:rgba(255,255,255,.75); }
+  .envelope.open .card{ transform:translateY(-215px); z-index:5; visibility:visible; transition:transform .6s ease .3s, visibility 0s linear 0s; }
+  .env-hint{ font-size:12px; color:var(--ink2); }
+  .env-caption{ max-width:420px; text-align:center; min-height:70px; opacity:0; transition:opacity .4s ease 1s; }
+  .envelope.open + .env-caption, .env-caption.show{ opacity:1; }
+  .env-caption b{ display:block; font-size:15px; margin-bottom:4px; }
+  .env-btns{ display:flex; gap:8px; }
+  .thumbs{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:8px; }
+  .thumbs button{ background:#fff; border:1px solid #ccc; padding:3px; cursor:pointer; }
+  .thumbs button.on{ border-color:var(--red); }
+  .thumbs .photo{ width:30px; height:40px; }
+  .thumbs .photo .face,.thumbs .photo .hair,.thumbs .photo .shirt,.thumbs .photo .strand{ transform:scale(.45); }
+  .thumbs .photo .face{ transform-origin:50% 0; top:8px; } .thumbs .photo .hair{ transform-origin:50% 0; top:4px; } .thumbs .photo .shirt{ transform-origin:50% 100%; }
+
+  /* ── 방명록 공책 ───────────────────────── */
+  .book{
+    background:#fffdf7; border:1px solid var(--line); padding:14px 18px 10px 44px; position:relative;
+    background-image:repeating-linear-gradient(transparent 0 27px, #dfe8f0 27px 28px);
+    line-height:28px;
+  }
+  .book::before{ content:""; position:absolute; left:32px; top:0; bottom:0; width:1px; background:#e7b8b8; }
+  .book::after{ content:""; position:absolute; left:8px; top:0; bottom:0; width:14px; background:repeating-linear-gradient(transparent 0 36px, #cfc6b6 36px 42px); background-position:0 20px; border-radius:50%; opacity:.6; }
+  .book .title{ text-align:center; letter-spacing:6px; font-size:15px; margin-bottom:0; }
+  .g{ margin:0; }
+  .g .who{ font-weight:bold; }
+  .g .when{ color:var(--ink2); font-size:11px; margin-left:6px; font-family:"Courier New",monospace; }
+  .g .re{ color:var(--red); padding-left:18px; }
+  .g .re::before{ content:"└ 사장 : "; }
+  .g .re.u{ color:#1a3fa0; } .g .re.u::before{ content:"└ " attr(data-who) " : "; }
+  .g.secret{ color:#9a9288; font-style:italic; }
+  .gform{ margin-top:14px; display:grid; grid-template-columns:120px 1fr auto; gap:8px; align-items:start; }
+  .gform input,.gform textarea{ font:inherit; font-size:13px; width:100%; background:#fff; border:1px solid #b9ad98; padding:5px 7px; }
+  .gform textarea{ height:52px; resize:none; }
+  .gform .full{ grid-column:1/-1; font-size:11px; color:var(--ink2); }
+  .gform label.chk{ display:flex; align-items:center; gap:4px; font-size:12px; }
+
+  /* ── 약도 ─────────────────────────────── */
+  .mapbox{ background:#fff; border:1px solid var(--line); padding:10px; display:flex; justify-content:center; }
+  .mapbox svg{ width:100%; max-width:520px; height:auto; font-family:"굴림","Gulim",sans-serif; }
+
+  /* ── 이사 소식 ────────────────────────── */
+  .term{ display:inline-block; background:#0000a8; color:#e8e8e8; font-family:"굴림체","GulimChe","Courier New",monospace; font-size:12px; line-height:1.55; padding:10px 14px; text-align:left; border:3px solid #2b2c31; margin:6px 0 12px; }
+  .term .y{ color:#ffff55; } .term .c{ color:#55ffff; } .term .dm{ color:#8a8ad0; }
+  .center{ text-align:center; }
+
+  footer{ margin-top:16px; padding:14px 4px 0; border-top:1px solid var(--line); font-size:11px; color:var(--ink2); text-align:center; line-height:1.8; }
+  footer .cr{ color:var(--ink); }
+
+  /* ── 암실 인트로 ──────────────────────── */
+  .darkroom{ position:fixed; inset:0; z-index:100; background:#160404; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; color:#e8a0a0; font-family:"굴림","Gulim",sans-serif; font-size:12px; letter-spacing:2px; }
+  .darkroom .lamp{ position:absolute; left:50%; top:-40px; width:140px; height:140px; margin-left:-70px; border-radius:50%; background:radial-gradient(circle,#b8202a 0 20%, rgba(184,32,42,.35) 45%, transparent 70%); filter:blur(6px); animation:hum 2.2s ease-in-out infinite; }
+  @keyframes hum{ 50%{ opacity:.7; } }
+  .tray{ position:relative; width:220px; height:290px; background:#3a0d10; border:6px solid #2a0a0c; box-shadow:inset 0 0 30px #000; display:flex; align-items:center; justify-content:center; }
+  .tray::after{ content:""; position:absolute; inset:0; background:linear-gradient(160deg, rgba(255,255,255,.08), transparent 40%, rgba(255,255,255,.05) 70%, transparent); animation:ripple 3s ease-in-out infinite; pointer-events:none; }
+  @keyframes ripple{ 50%{ transform:translateY(6px); opacity:.6; } }
+  .sheet{ width:150px; height:200px; background:#fff; box-shadow:0 2px 10px #000; overflow:hidden; position:relative; }
+  .sheet .photo{ width:150px; height:200px; filter:brightness(4) contrast(0) sepia(1) hue-rotate(-30deg); animation:develop 2.6s ease-in .3s forwards; }
+  @keyframes develop{
+    0%{ filter:brightness(4) contrast(0) sepia(1) hue-rotate(-30deg); }
+    55%{ filter:brightness(1.6) contrast(.5) sepia(.8) hue-rotate(-20deg); }
+    100%{ filter:brightness(1) contrast(1) sepia(.15) hue-rotate(0); }
+  }
+  .darkroom .cap{ margin-top:4px; }
+  .darkroom .cap span{ display:inline-block; min-width:14px; text-align:left; }
+  .darkroom .skip{ position:absolute; right:16px; bottom:14px; font:inherit; color:#e8a0a0; background:none; border:1px solid #7a2a2a; padding:4px 12px; cursor:pointer; letter-spacing:1px; }
+  .darkroom.done{ animation:lights .7s ease forwards; }
+  @keyframes lights{ to{ opacity:0; visibility:hidden; } }
+
+  /* ── 심심풀이 ─────────────────────────── */
+  .gtabs{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .gtabs button{ font:inherit; font-size:12px; background:#fff; border:1px solid var(--line); padding:4px 12px; cursor:pointer; color:var(--ink2); }
+  .gtabs button.on{ border-color:var(--red); color:var(--red); }
+  .gbox{ background:#fff; border:1px solid var(--line); padding:16px; min-height:300px; }
+  .gbox .env-area{ background:none; }
+  .gbox .say{ min-height:44px; padding:8px 12px; background:#f6f0e0; border-left:3px solid var(--red); margin:10px 0; font-size:13px; }
+  .gbox .say b{ color:var(--red); }
+  .gscore{ font-family:"Courier New",monospace; font-size:12px; color:var(--ink2); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+  .pick{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; justify-items:center; }
+  .pick button{ background:#fff; border:1px solid #ccc; padding:6px 6px 4px; cursor:pointer; font:inherit; font-size:10px; color:var(--ink2); }
+  .pick button:hover{ border-color:var(--red); }
+  .pick button.ok{ border:2px solid #2d6a0a; } .pick button.bad{ border:2px solid var(--red); opacity:.6; }
+  .pick .photo{ width:80px; height:106px; }
+  .pick .photo .face,.pick .photo .hair,.pick .photo .shirt,.pick .photo .strand{ transform:scale(1.2); } .pick .photo .face{ transform-origin:50% 0; top:26px; } .pick .photo .face.tilt{ transform:scale(1.2) rotate(-12deg); } .pick .photo .hair{ transform-origin:50% 0; top:18px; } .pick .photo .hair.side{ transform:scale(1.2) skewX(-8deg); } .pick .photo .shirt{ transform-origin:50% 100%; }
+  .shutter{ text-align:center; }
+  .shutter .stage{ display:inline-block; background:#fff; padding:8px; border:1px solid #ccc; margin:6px 0; }
+  .shutter .big .eye{ transition:height .08s; }
+  .shutter .cue .face{ box-shadow:0 0 0 3px rgba(181,18,27,.35); }
+  .shutter .btn.primary{ font-size:15px; padding:8px 30px; }
+  .memo{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; max-width:420px; margin:0 auto; }
+  .memo button{ position:relative; height:92px; padding:0; border:1px solid #ccc; background:#2a2622; cursor:pointer; overflow:hidden; }
+  .memo button::after{ content:"DAEBAK"; position:absolute; inset:0; display:grid; place-items:center; color:#8f846f; font:bold 9px "Courier New",monospace; letter-spacing:2px; }
+  .memo button .photo{ display:none; margin:0 auto; }
+  .memo button.up{ background:#fff; } .memo button.up::after{ display:none; } .memo button.up .photo{ display:block; }
+  .memo button.done{ opacity:.45; cursor:default; }
+  .guard{ position:relative; height:260px; background:var(--wall); border:1px solid var(--line); border-bottom:8px solid #b9ad98; overflow:hidden; user-select:none; }
+  .guard .fr{ position:absolute; left:50%; top:30px; transform:translateX(-50%); }
+  .guard .fr.gone .photo{ visibility:hidden; }
+  .guard .fr .empty{ position:absolute; inset:8px 8px 22px; display:none; place-items:center; font-size:10px; color:#999; }
+  .guard .fr.gone .empty{ display:grid; }
+  .hand{ position:absolute; width:110px; height:34px; cursor:pointer; transform-origin:0 50%; }
+  .hand .arm{ position:absolute; left:0; top:8px; width:78px; height:18px; background:#2a3d66; }
+  .hand .palm{ position:absolute; left:74px; top:2px; width:32px; height:30px; background:#e9be92; border-radius:40% 50% 50% 40%; }
+  .hand .palm::before{ content:""; position:absolute; left:6px; top:-8px; width:22px; height:12px; background:#e9be92; border-radius:50% 50% 0 0; }
+  .hand.r{ transform:scaleX(-1); transform-origin:50% 50%; }
+  .hand.hit{ animation:slap .25s ease forwards; }
+  @keyframes slap{ to{ transform:translateX(-140px); opacity:0; } }
+  .hand.r.hit{ animation:slapr .25s ease forwards; }
+  @keyframes slapr{ to{ transform:scaleX(-1) translateX(-140px); opacity:0; } }
+  @media (max-width:640px){ .pick{ grid-template-columns:repeat(2,1fr); } .memo button{ height:80px; } }
+  .toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#2a2622; color:#f3eee3; padding:8px 16px; font-size:12px; display:none; z-index:60; letter-spacing:1px; }
+  .toast.on{ display:block; }
+
+  @media (max-width:640px){
+    body{ padding:14px 8px 30px; }
+    .sign h1{ font-size:26px; letter-spacing:6px; }
+    .frames{ gap:14px; }
+    .fr.hide-m{ display:none; }
+    nav.menu{ font-size:12px; }
+    nav.menu button{ padding:2px 8px; }
+    main{ padding:16px 14px 20px; }
+    .greet{ grid-template-columns:1fr; justify-items:center; }
+    .greet .txt{ font-size:13.5px; }
+    .gform{ grid-template-columns:1fr; }
+    .envelope{ margin-top:140px; }
+    .infobar{ justify-content:center; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .newgif,.darkroom .lamp,.tray::after{ animation:none; }
+    .sheet .photo{ animation-duration:.01s; }
+    .envelope .flap,.envelope .card,.env-caption{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="darkroom" id="darkroom" aria-hidden="true">
+  <div class="lamp"></div>
+  <div class="tray"><div class="sheet" id="sheet"></div></div>
+  <div class="cap">인 화 중 <span id="dots">.</span></div>
+  <button class="skip" type="button" id="skip">건너뛰기</button>
+</div>
+
+<div class="wrap">
+  <header class="sign">
+    <div class="since">S I N C E &nbsp; 1 9 8 7</div>
+    <h1 class="serif" id="signTitle">대박<span>칼라</span>사진관</h1>
+    <div class="tag">각종 증명사진 10분 완성 · 필름 현상 · 인화 · 옛날사진 복원</div>
+  </header>
+
+  <div class="window" aria-label="쇼윈도">
+    <div class="rail"></div>
+    <div class="frames" id="frames"></div>
+    <div class="note">손님 허락을 받은 사진만 걸었습니다.</div>
+  </div>
+
+  <div class="infobar">
+    <div class="counter"><span>필름 카운터</span><span class="win" id="cnt">00000</span><span class="muted">(1997년 하이텔 정보마당부터 누적)</span></div>
+    <div>예약 · 문의 <span class="tel">019-1001-0684</span></div>
+  </div>
+
+  <nav class="menu" id="nav">
+    <button data-page="home">인사말</button>
+    <button data-page="about">사진관 소개</button>
+    <button data-page="guide">이용 안내</button>
+    <button data-page="map">오시는 길</button>
+    <button data-page="play">심심풀이</button>
+    <button data-page="guest">방명록</button>
+  </nav>
+
+  <main id="main"></main>
+
+  <footer>
+    서울시 관악구 합격동 684 (대박골목 맨 왼쪽) · 019-1001-0684 · 평일 09~19시 · 토 09~17시 · 일 · 공휴일 휴무<br>
+    1997년 하이텔 정보마당은 <a href="#" data-old>그대로 있습니다</a><br>
+    <span class="cr">사진 촬영은 대박칼라사진관 · 사진 속 사람 찾기는 <a href="../daebak-office/">대박흥신소</a></span><br>
+    Copyright 2010 대박칼라사진관
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ★ 옛날 홈페이지(하이텔) 주소. 폴더명을 바꾸면 여기만 고치면 됩니다. */
+  var OLD_SITE = "../daebak-photo/";
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+  /* ── CSS 증명사진 ── */
+  function photo(o, cls){
+    o = o || {};
+    var h = '<div class="photo ' + (cls || "") + (o.blur ? " blur" : "") + '">';
+    h += '<div class="hair ' + (o.hair || "") + '"></div>';
+    h += '<div class="face ' + (o.face || "") + '">';
+    if(o.brow !== false) h += '<div class="brow l ' + (o.brow || "") + '"></div><div class="brow r ' + (o.brow || "") + '"></div>';
+    h += '<div class="eye l ' + (o.eye || "") + '"></div><div class="eye r ' + (o.eye || "") + '"></div>';
+    if(o.glasses) h += '<div class="glasses"></div>';
+    if(o.cheek) h += '<div class="cheek l"></div><div class="cheek r"></div>';
+    h += '<div class="nose"></div><div class="mouth ' + (o.mouth || "") + '"></div>';
+    h += '</div><div class="shirt ' + (o.shirt || "") + '"></div>';
+    if(o.strand) h += '<div class="strand"></div>';
+    if(o.flash) h += '<div class="flashfx"></div>';
+    return h + '</div>';
+  }
+  var BOSS = { hair:"gray", glasses:true, shirt:"dark" };
+  var JH   = { hair:"up", eye:"big", mouth:"smile", shirt:"blue notie", cheek:true };
+  var JUHAN= { hair:"black", shirt:"notie", mouth:"", brow:"thick" };
+  var MINJAE={ hair:"wavy", shirt:"vest notie", mouth:"smile", eye:"big", cheek:true };
+
+  /* ── 쇼윈도 액자 ── */
+  document.getElementById("frames").innerHTML =
+    '<div class="fr thin">' + photo({ hair:"bob", shirt:"pink notie", mouth:"smile" }) + '<small>증명 3×4</small></div>' +
+    '<div class="fr thin hide-m">' + photo({ hair:"perm", shirt:"green", glasses:true }, "w3545") + '<small>여권 3.5×4.5</small></div>' +
+    '<div class="fr gold" title="1997년 촬영. 열세 번 없어졌다가 열세 번 돌아왔습니다. 올해부터 나사를 박았습니다.">' +
+      '<div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>' +
+      photo(JUHAN, "big sepia") + '<small>1997 · 차주한 · 동차합격</small></div>' +
+    '<div class="fr thin">' + photo(MINJAE, "card") + '<small>포토카드 5.5×8.5</small></div>';
+
+  /* ── 필름 카운터 (GoatCounter) ── */
+  var BASE = 20000;
+  function setCnt(n){ document.getElementById("cnt").textContent = String(n).padStart(5,"0"); }
+  setCnt(BASE);
+  fetch("https://pencilprism.goatcounter.com/counter/TOTAL.json")
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ var n = d ? parseInt(String(d.count).replace(/[^0-9]/g,""),10) : NaN; if(!isNaN(n)) setCnt(n + BASE); })
+    .catch(function(){});
+
+  /* ── 암실 인트로 ── */
+  var dr = document.getElementById("darkroom");
+  document.getElementById("sheet").innerHTML = photo(JUHAN, "big");
+  var dots = document.getElementById("dots"), dn = 1;
+  var dotT = setInterval(function(){ dn = dn % 3 + 1; dots.textContent = new Array(dn + 1).join("."); }, 400);
+  function lightsOn(){ if(dr.classList.contains("done")) return; dr.classList.add("done"); clearInterval(dotT); setTimeout(function(){ dr.style.display = "none"; }, 800); }
+  document.getElementById("skip").onclick = lightsOn;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(lightsOn, reduced ? 200 : 3400);
+
+  /* ── B컷 ── */
+  var BCUTS = [
+    { t:"눈 감기 0.1초 전",        c:"플래시가 언제나 더 빠릅니다. 화면으로 바로 확인해 드려도 그렇습니다.", p:{ eye:"shut", flash:true, hair:"bob", shirt:"pink notie" } },
+    { t:"재채기 직전",             c:"참으셨어야 했는데, 못 참으셨습니다.", p:{ eye:"squint", mouth:"open", hair:"perm", shirt:"green", glasses:true } },
+    { t:"웃지 말라니까 웃은 컷",    c:"증명사진엔 못 쓰지만 제일 잘 나왔습니다.", p:{ eye:"squint", mouth:"laugh", cheek:true, hair:"long", shirt:"stripe notie" } },
+    { t:"머리카락 한 올이 하늘로",  c:"정전기는 저희도 어쩌지 못합니다. 지워 드릴 수는 있습니다만 그냥 둡니다.", p:{ strand:true, hair:"side", shirt:"blue" } },
+    { t:"숨 참다가 볼 부푼 컷",     c:"숨은 쉬셔도 됩니다. 매번 말씀드립니다.", p:{ eye:"squint", hair:"up", shirt:"dark", cheek:true } },
+    { t:"창밖을 본 컷",            c:"밖에서 오토바이가 지나갔습니다.", p:{ eye:"side", hair:"gray", shirt:"green" } },
+    { t:"의자 높이 맞추던 중",      c:"준비 안 되셨을 때가 제일 자연스럽습니다.", p:{ blur:true, mouth:"open", hair:"cap", shirt:"blue notie" } },
+    { t:"표정 준비 전의 진짜 얼굴", c:"이 한 장 때문에 B컷을 시작했습니다.", p:{ hair:"long", shirt:"dark notie" } },
+    { t:"사장과 눈 마주친 컷",      c:"셔터 누르다 저도 같이 웃었습니다.", p:{ eye:"side", mouth:"laugh", hair:"bob", shirt:"stripe notie" } },
+    { t:"눈동자를 굴린 순간",       c:"전화벨 때문에 눈동자를 굴려도 화보 같았습니다.", p:{ eye:"big side", brow:"thick", hair:"black", shirt:"notie" } },
+    { t:"크게 웃어버리는 중",       c:"환하게 웃다가 고개를 기울이셨는데 제 마음이 기울 뻔했습니다.", p:{ face:"tilt", eye:"squint", mouth:"laugh", cheek:true, hair:"wavy", shirt:"vest notie" } },
+    { t:"화면 보고 웃어버린 컷",    c:"찍자마자 화면으로 보여드리니 다들 여기서 웃으십니다. 2010년에 새로 생긴 B컷입니다.", p:{ eye:"squint", mouth:"smile", cheek:true, hair:"wavy", shirt:"vest notie" } }
+  ];
+  BCUTS.forEach(function(b,i){ b.file = "B_" + (2010000 + i + 1) + ".JPG"; });
+  var bi = Math.floor(Math.random() * BCUTS.length);
+
+  /* ── 공지 ── */
+  var POSTS = [
+    { no:"공지", pin:true, title:"홈페이지를 새로 단장했습니다", name:"왕대박", date:"10.08.19",
+      body:"1999년에 제가 만든 홈페이지를 직원 진혁이가 새로 단장했습니다. 그동안도 소식은 계속 올렸습니다만, 전체 모양을 손본 건 11년 만입니다.\n\n기다리시는 손님들이 대기 공간 컴퓨터로 간단한 게임도 해 보시게 '심심풀이'를 넣었습니다. 집에서도 됩니다.\n\n1997년 하이텔 정보마당은 지우지 않고 그대로 둡니다. 방명록도 그대로 있습니다. 사진관 자리도, 전화도 그대로입니다." },
+    { no:"7", title:"9월 23일 홈페이지 공사 예정", name:"왕대박", date:"10.08.19",
+      body:"9월 23일부터 홈페이지 공사를 합니다. 공사 중에는 첫 화면이 잠시 바뀝니다.\n\n하이텔 정보마당과 이 홈페이지는 그대로 둡니다. 공사 중 첫 화면에서 건너오시면 됩니다. 사진관은 공사 안 합니다. 평소대로 엽니다." },
+    { no:"6", title:"디지털 촬영을 시작했습니다", name:"왕대박", date:"10.07.02",
+      body:"찍자마자 화면으로 같이 보고 고릅니다. 눈 감으신 건 그 자리에서 다시 찍습니다.\n\n필름 촬영도 계속 합니다. 암실도, 87년 조명도 그대로입니다. 파일은 원하시면 CD에 담아 드립니다." },
+    { no:"5", title:"벽에 걸린 사진에 대하여", name:"왕대박", date:"10.06.11",
+      body:"벽에 걸린 사진은 파는 물건이 아닙니다. 떼 가서도 안 됩니다. 올해부터 액자에 나사를 박았습니다.\n\n여기서 찍는다고 붙는다는 말은 제가 한 말이 아닙니다. 다만 잘 나오게는 찍습니다.\n\n증명사진 필름 보관 및 추가 인화는 본인만 가능합니다. 이 원칙은 13년째 그대로입니다." },
+    { no:"4", title:"로스쿨 원서용 사진", name:"왕대박", date:"10.03.02",
+      body:"작년에 법대 정문이 로스쿨 정문이 됐습니다.\n\n원서용 사진 규격은 학교마다 다릅니다. 모집요강을 들고 오시면 맞춰 드립니다." },
+    { no:"3", title:"전화번호는 그대로입니다", name:"왕대박", date:"10.01.15",
+      body:"019를 010으로 바꾸라는 전화가 자주 옵니다. 안 바꿉니다.\n\n97년 10월부터 쓴 번호이고, 봉투에도 찍혀 있습니다. 019-1001-0684. 그대로 거시면 됩니다." },
+    { no:"2", title:"영업시간 안내", name:"왕대박", date:"09.09.01",
+      body:"평일 09:00 ~ 19:00\n토요일 09:00 ~ 17:00\n일요일 · 공휴일 휴무\n\n예약 없이 오셔도 됩니다. 점심시간 직후가 제일 한가합니다. 촬영 마감은 문 닫기 30분 전입니다." },
+    { no:"1", title:"인터넷 홈페이지를 열었습니다", name:"왕대박", date:"99.03.02",
+      body:"동네에 초고속 인터넷이 들어왔습니다. 저희도 홈페이지를 냈습니다. 제가 직접 만들었습니다.\n\n하이텔 정보마당은 지우지 않고 그대로 둡니다. 거기가 편하신 분은 거기로 오십시오." }
+  ];
+
+  /* ── 방명록 ── */
+  var GUEST = [
+    { who:"왕대박사진사", when:"10.08.19", msg:"저한테 사진 찍으신 손님들의 합격을 진심으로 기원하긴 합니다만 여기서 찍는다고 반드시 붙는다고 할 순 없습니다. 97년에도 이렇게 적었습니다. 하이텔 방명록에 남겨 주신 글들은 옛날 정보마당에 그대로 있습니다." },
+    { who:"기자아님", when:"10.08.19", msg:"왕대박 사장님!!! 차주한 학우 변호사 되고도 여기 다시 와서 사진 찍었다는 게 사실인가요? 사실이라면 그 사진을 왜 안 걸어 주시나요?!" },
+    { who:"합격대박기원", when:"10.08.18", msg:"여기서 리트 만점자 사진을 찍었다는 게 사실인가요? 대박행진 어디까지…", rw:"리트의철벽", re:"리트 만점자 아직 없어… 미래에도 안 나올 거 같은데… 나오려나…" },
+    { who:"줄서기줄이기", when:"10.08.18", msg:"무슨 요일이 줄이 제일 짧을까요? 선배님들 꿀팁 기다립니다", rw:"직원", re:"요일보다 시간입니다. 점심시간 직후가 제일 한가합니다." },
+    { who:"로스쿨1기", when:"10.08.18", msg:"선배들이 여기서 찍으면 붙는다던데 로스쿨도 해당되나요?", re:"사시든 로스쿨이든 사진은 같은 사진입니다. 붙는 건 보장 못 합니다. 잘 나오게는 찍습니다." },
+    { who:"신림동지박령", when:"10.08.17", msg:"97년에 하이텔 방명록에 글 남겼던 사람입니다. 신림동9년차에서 10년차로 넘어갔었지만 그 해 합격해서 탈출했습니다. 대박칼라사진관에서 합격 기 받아가세요! 다만 동네에 정들어서 잠깐 탈출했다가 다시 돌아와 사진관 근처 살고 있어요. 오며가며 지나갈 때마다 감사한 마음입니다." },
+    { who:"고시원302호", when:"10.08.16", msg:"97년에 벽에 걸린 사진 뜯어갔던 사람입니다. 13년 만에 자수하러 왔다가 증명사진 찍고 갑니다. 이번엔 안 뜯었습니다.", re:"압니다. 그때 글도 기억합니다. 액자에 나사 박은 뒤로는 아무도 못 뜯습니다." },
+    { who:"사진관단골", when:"10.08.14", msg:"여권사진 찍으러 갔다가 화면에 뜬 B컷 보고 또 한참 웃었습니다. 13년째입니다." },
+    { who:"지갑속포토카드", when:"10.08.10", msg:"97년에 만든 포토카드 아직 지갑에 있습니다. 종이가 튼튼하네요. 이번에 애 사진으로 하나 더 만들었습니다." },
+    { who:"010으로바꾸세요", when:"10.08.09", msg:"사장님 019 언제 바꾸세요? 저장할 때마다 헷갈립니다.", re:"안 바꿉니다." },
+    { who:"첫여권", when:"10.08.05", msg:"97년에 여기서 첫 여권사진 찍었는데 이번에 갱신하러 다시 왔습니다. 귀는 여전히 보이게 찍어 주셨습니다." },
+    { who:"하이텔초보", when:"10.08.03", msg:"정보마당이 없어지는 줄 알고 놀랐습니다. 그대로 둔다니 다행입니다. 저는 아직 하이텔초보입니다." },
+    { who:"눈감은사나이", when:"10.08.01", msg:"이번에도 눈 감았습니다. 화면으로 확인까지 했는데 감았습니다. 이번 B컷도 책상 앞에 붙였습니다." },
+    { who:"신림동9년차", when:"10.07.30", msg:"97년에 부모님 결혼사진 복원 맡겼던 사람입니다. 어머니 팔순 사진 찍으러 다시 왔습니다. 그 사진 아직 잘 걸려 있습니다.", re:"고맙습니다. 팔순 사진도 잘 나왔습니다." },
+    { who:"소문듣고왔어요", when:"10.07.28", msg:"13년 전에 소문 듣고 왔던 사람입니다. 그때 찍은 사진으로 붙었습니다. 이번엔 아들 데리고 왔습니다." }
+  ];
+
+  /* ── 페이지 ── */
+  var PAGES = {
+    home: function(){
+      var h = '<h2 class="serif">인사말</h2>' +
+        '<div class="greet"><div class="pic">' + photo(BOSS, "big") + '<small>왕대박 · 2010</small></div>' +
+        '<div class="txt serif"><p class="lead">어서 오십시오. 왕대박입니다.</p>' +
+        '<p>1987년부터 이 자리에서 사진 찍고 있습니다. 하이텔에 정보마당을 열었던 게 97년인데 벌써 13년입니다.</p>' +
+        '<p>그 사이 법대 정문은 로스쿨 정문이 되었고, 벽에 걸린 사진 속 학생은 변호사가 되었습니다. 카메라는 디지털로 바꿨습니다만, <span class="red">조명은 87년 그 조명입니다.</span></p>' +
+        '<p>각종 증명사진 10분 완성. 필름 현상과 인화, 빛바랜 옛날사진 복원도 합니다. 언제든지 또 찍으러 오십시오.</p></div></div>' +
+        '<h3>소식</h3><table class="list">';
+      POSTS.forEach(function(p){
+        h += '<tr' + (p.pin ? ' class="pin"' : "") + '><td class="d">' + p.date + '</td><td><button class="link" data-post="' + esc(p.no) + '">' + esc(p.title) + '</button></td><td class="w">' + esc(p.name) + '</td></tr>';
+      });
+      return h + '</table>';
+    },
+    post: function(no){
+      var p = null; POSTS.forEach(function(x){ if(x.no === no) p = x; });
+      if(!p) return PAGES.home();
+      return '<h2 class="serif">소식</h2><div class="post"><h4 class="serif">' + esc(p.title) + '</h4><div class="meta">' + esc(p.name) + ' · ' + p.date + '</div><div class="body">' + esc(p.body) + '</div></div>' +
+        '<div class="right"><button class="btn" data-page="home">목록</button></div>';
+    },
+    about: function(){
+      return '<h2 class="serif">사진관 소개</h2>' +
+        '<p>대박칼라사진관은 1987년 관악구 합격동에 문을 열었습니다. 법대 정문 앞이라 고시생 손님이 많았고, 2009년부터는 로스쿨 학생 손님이 많습니다. 문 연 첫해부터 같은 자리에서 같은 조명을 씁니다.</p>' +
+        '<p>필름은 안쪽 암실에서 직접 현상합니다. 2010년 여름부터 디지털 촬영을 시작했습니다만 암실은 그대로 있습니다. 필름으로 찍고 싶다 하시면 필름으로 찍습니다.</p>' +
+        '<h3>일하는 사람</h3><div class="people">' +
+          '<div class="person"><div class="pic">' + photo(BOSS) + '</div><div><b>왕대박 (사장)</b><span class="muted">1987년 개업. 촬영 · 현상 · 복원.<br>하이텔 정보마당 시삽 13년째.</span></div></div>' +
+          '<div class="person"><div class="pic">' + photo(JH) + '</div><div><b>나진혁 (직원)</b><span class="muted">2008년 8월 입사. 촬영 보조 · 보정 · 홈페이지.</span></div></div>' +
+        '</div>' +
+        '<h3>벽에 걸린 사진</h3>' +
+        '<p>가게 벽에 증명사진이 하나 걸려 있습니다. 97년에 여기서 찍고 한 번에 붙으셨던 <span class="red">차주한 학우</span>, 지금은 변호사입니다. 그 뒤로 여기서 찍으면 붙는다는 소문이 났습니다만, 제가 낸 소문이 아닙니다.</p>' +
+        '<p>이 사진은 여러 번 없어졌다가 여러 번 돌아왔습니다. 올해부터 액자에 나사를 박았습니다. <span class="muted">필름 보관 및 추가 인화는 본인만 가능합니다.</span></p>' +
+        '<h3>사진 봉투에 적힌 말</h3>' +
+        '<div class="envelope-text serif"><span class="muted">증명 / 취업 / 여권 / 비자 / 우정 / 프로필 / 가족 / 졸업</span><br><span class="nm">대박칼라사진관</span><br>* 각종 증명사진 10분 완성<br>* 빛바랜 옛날사진 복원 가능<br><span class="tel2">예약 / 문의 019-1001-0684</span> 친절하게 상담해 드립니다.<br><br>잘 나온 사진은 오래 보관하시고,<br>마음에 안 드는 사진도 나중에 보면 추억이니 간직해 주세요.<br>언제든지 또 찍으러 오세요.</div>' +
+        '<p class="muted" style="margin-top:8px">※ 봉투 문안은 97년부터 그대로입니다.</p>' +
+        '<h3>홈페이지 이사 소식</h3>' +
+        '<p><b>1997년</b> 하이텔 정보마당 개설 &nbsp;→&nbsp; <b>1999년</b> 인터넷 홈페이지 개설 &nbsp;→&nbsp; <b>2010년</b> 새 단장</p>' +
+        '<div class="center"><div class="term"><span class="c">KOREA TELECOM  HiTEL  정보통신 서비스</span><br>ID    : daebak<br>접속을 환영합니다.  마지막 접속 97/10/08 21:14<br><span class="y">go DAEBAK</span></div></div>' +
+        '<p>파란 화면으로 오셨던 분들, 고맙습니다. 옛날 정보마당은 지우지 않고 그대로 둡니다. 방명록도, B컷 자료실도 그대로입니다. 여기가 편하신 분은 여기로, 거기가 편하신 분은 거기로 오십시오. 사진관은 한 군데입니다.</p>' +
+        '<div class="center"><button class="btn primary" data-old>옛날 홈페이지(하이텔)로 가기</button></div>';
+    },
+    spec: function(){
+      return '<h2 class="serif">이용 안내</h2><h3 style="margin-top:0;font-size:15px">촬영 안내</h3>' +
+        '<table class="spec"><tr><th>증명사진</th><td>이력서 · 학생증 · 자격증 · 로스쿨 원서</td><td class="c">3 × 4 cm</td></tr>' +
+        '<tr><th>여권사진</th><td>여권 · 비자 신청 (흰 배경, 귀와 눈썹 보이게)</td><td class="c">3.5 × 4.5 cm</td></tr>' +
+        '<tr><th>사원증 · 명함판</th><td>사원증 · 출입증 · 명함용. 회사 규격이 있으면 맞춰 드립니다.</td><td class="c">2.5 × 3 cm</td></tr>' +
+        '<tr><th>포토카드</th><td>지갑에 쏙 들어가는 크기. 대박칼라 히트상품.</td><td class="c">5.5 × 8.5 cm</td></tr>' +
+        '<tr class="hi"><th>종합세트</th><td>위 세 가지 모두. 한 번 앉아서 세 가지를 다 찍습니다. 조명을 한 번 잡아두고 배경만 바꿉니다.</td><td class="c">3종 · 약 20분</td></tr></table>' +
+        '<h3>디지털 촬영 (2010년 7월부터)</h3>' +
+        '<p>찍자마자 화면으로 같이 보고 고릅니다. 눈 감으신 건 그 자리에서 다시 찍습니다. 원하시면 파일을 CD에 담아 드립니다. 인터넷 원서 접수에 쓰시면 됩니다. 필름 촬영도 계속 합니다. 말씀만 하십시오.</p>' +
+        '<h3>보정에 대하여</h3>' +
+        '<p>뾰루지, 잔머리, 옷깃 정도는 정리해 드립니다. <span class="red">얼굴형, 눈 크기, 코 높이는 바꾸지 않습니다.</span> 신분증 사진은 본인이어야 합니다.</p>' +
+        '<h3>인화용지</h3>' +
+        '<table class="spec"><tr><th>증명 · 여권</th><td class="c">고급필름지</td></tr><tr><th>포토카드</th><td class="c">인버코트지</td></tr></table>' +
+        '<p class="muted">좋은 추억, 좋은 사진은 좋은 종이에서 시작됩니다. 97년부터 같은 종이입니다.</p>' +
+        '<h3>오실 때</h3>' +
+        '<p>상의는 두 벌쯤 들고 오세요. 화면으로 같이 보고 고르는 편이 빠릅니다.<br>앞머리는 그대로 두세요. 여기서 정리해 드립니다.<br>여권사진은 귀와 눈썹이 보여야 합니다. 안경은 벗는 편을 권합니다.<br>로스쿨 원서는 학교마다 규격이 다릅니다. 모집요강을 들고 오시면 맞춰 드립니다.</p>' +
+        '<p class="muted">※ 각종 증명사진은 10분이면 나옵니다. 깜짝선물 B컷은 값을 받지 않습니다. </p>';
+    },
+    film: function(){
+      return '<h3 style="font-size:15px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)">필름 현상 · 인화</h3>' +
+        '<p>1987년부터 안쪽 암실에서 직접 현상합니다. 찍어 오신 필름, 서랍에 있던 필름, 디지털카메라 파일 모두 인화해 드립니다.</p>' +
+        '<h3>현상</h3>' +
+        '<table class="spec"><tr><th>컬러 필름</th><td>35mm · 120. 당일 현상. 오전에 맡기시면 오후에 찾으십니다.</td></tr>' +
+        '<tr><th>흑백 필름</th><td>35mm · 120. 손으로 현상하기 때문에 이틀 걸립니다. 그만큼 잘 나옵니다.</td></tr>' +
+        '<tr><th>일회용 카메라</th><td>그대로 가져오십시오. 필름을 꺼내 드립니다.</td></tr>' +
+        '<tr><th>슬라이드 필름</th><td>받지 않습니다. 하는 곳을 알려 드립니다.</td></tr></table>' +
+        '<h3>인화 규격</h3>' +
+        '<table class="spec"><tr><th>3 × 5</th><td>8.9 × 12.7 cm. 앨범용 기본 크기입니다.</td><td class="c">3×5</td></tr>' +
+        '<tr><th>4 × 6</th><td>10.2 × 15.2 cm. 요즘 제일 많이 뽑는 크기입니다. 엽서 크기입니다.</td><td class="c">4×6</td></tr>' +
+        '<tr><th>5 × 7</th><td>12.7 × 17.8 cm. 책상 액자용.</td><td class="c">5×7</td></tr>' +
+        '<tr><th>8 × 10</th><td>20.3 × 25.4 cm. 벽에 거는 크기. 가족사진, 영정사진.</td><td class="c">8×10</td></tr>' +
+        '<tr><th>D 사이즈</th><td>디지털카메라 파일(4:3)은 잘리지 않게 D4 · D5 · D6으로 뽑아 드립니다.</td><td class="c">D4~D6</td></tr>' +
+        '<tr><th>그 이상</th><td>11 × 14부터는 상담 후 이틀. 액자까지 해 드립니다.</td><td class="c">상담</td></tr></table>' +
+        '<h3>인화지</h3>' +
+        '<p><b>유광</b> 색이 선명합니다. 손자국이 남습니다.<br><b>무광</b> 손자국이 안 남습니다. 액자에 넣기 좋습니다.<br><b>반광</b> 말씀 없으시면 반광으로 뽑습니다.</p>' +
+        '<h3>이렇게 됩니다</h3>' +
+        '<p><b>전체 인화</b> 한 롤을 다 뽑습니다. 24컷, 36컷.<br><b>선택 인화</b> 화면으로 보고 고르신 컷만 뽑습니다. 한 장부터 됩니다.<br><b>바로 인화</b> 디지털 파일은 기다리시는 동안 나옵니다. 메모리카드, CD, 휴대전화 다 됩니다.<br><b>필름 스캔</b> 현상한 필름을 CD에 담아 드립니다. 인터넷에 올리실 수 있습니다.</p>' +
+        '<h3>옛날 필름</h3>' +
+        '<p>서랍에 있던 필름도 가져오십시오. 80년대 필름도 대부분 살아 있습니다. 상태를 보고 말씀드립니다.</p>' +
+        '<p class="muted">※ 저희 가게에서 찍은 증명사진 필름은 저희가 보관합니다. 모자라면 언제든 더 뽑으러 오십시오. 추가 인화는 본인만 가능합니다.</p>';
+    },
+    guide: function(){ return PAGES.spec() + PAGES.film() + PAGES.restore(); },
+    restore: function(){
+      function pair(){ return '<div class="hair a"></div><div class="face a"><div class="eye l"></div><div class="eye r"></div><div class="nose"></div><div class="mouth smile"></div></div><div class="hair b"></div><div class="face b"><div class="eye l"></div><div class="eye r"></div><div class="nose"></div><div class="mouth"></div></div>'; }
+      return '<h3 style="font-size:15px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)">빛바랜 옛날사진 복원</h3>' +
+        '<p>접힌 자국, 물 얼룩, 빛바랜 색. 가져와 보십시오. 87년부터 손으로 하던 일을 작년부터 스캐너와 화면으로 합니다. 전보다 잘 살아납니다.</p>' +
+        '<div class="restore"><div class="pic old"><div class="photo">' + pair() + '</div><small>복원 전 · 1978년 · 접힘 · 물 얼룩</small></div><div class="arrow">→</div><div class="pic"><div class="photo">' + pair() + '</div><small>복원 후</small></div></div>' +
+        '<h3>합니다</h3><p>접힌 자국 메우기, 얼룩 지우기, 바랜 색 되살리기, 찢어진 곳 잇기, 확대 인화.</p>' +
+        '<h3>안 합니다</h3><p>없는 사람 넣기, 있는 사람 빼기, 배경 바꾸기. 사진은 그때 그대로여야 사진입니다.</p>' +
+        '<p class="muted">※ 상태를 보고 상담해 드립니다. 원본은 스캔 후 그 자리에서 돌려드립니다.</p>';
+    },
+    bcut: function(){
+      var h = '<p>봉투를 열었는데 이상한 사진이 들어있다고요? 놀라지 마세요. 대박칼라사진관의 깜짝선물, <span class="red">B컷</span>입니다. 값은 받지 않습니다.</p>' +
+        '<div class="env-area">' +
+          '<div class="envelope" id="env">' +
+            '<div class="back"></div>' +
+            '<div class="card" id="envCard"></div>' +
+            '<div class="pocket"><div class="to"><span></span><i>귀하</i></div><div class="kinds">증명/취업/여권/비자<br>우정/프로필/가족/졸업</div><div class="nm">대박칼라사진관</div><div class="li">※ 각종 증명사진 10분 완성<br>※ 빛바랜 옛날사진 복원 가능</div><div class="t">예약/문의 T. 019-1001-0684<br>친절하게 상담해 드립니다.</div></div>' +
+            '<div class="flap"></div>' +
+          '</div>' +
+          '<div class="env-caption" id="envCap"></div>' +
+          '<div class="env-btns"><button class="btn" id="envPrev">◀</button><button class="btn primary" id="envNext">봉투 열기</button></div>' +
+          '<div class="thumbs" id="thumbs"></div>' +
+        '</div>' +
+        '<p class="muted">※ 손님 허락을 받은 것만 올렸습니다. 이목구비는 실제와 다를 수 있습니다. 1997년 B컷은 <a href="#" data-old>옛날 정보마당 3번 자료실</a>에 그대로 있습니다.</p>';
+      return h;
+    },
+    guest: function(){
+      var h = '<h2 class="serif">방명록 <small>1987년 카운터 위에 놓여 있던 공책에서 시작했습니다</small></h2>' +
+        '<p>87년 개업하던 날 카운터에 올려 둔 공책이 97년 하이텔 정보마당 방명록을 지나 여기까지 왔습니다. 공책과 정보마당 방명록은 그대로 있습니다.</p>' +
+        '<div class="book"><p class="title serif">방 명 록</p>';
+      GUEST.forEach(function(g){
+        h += '<p class="g' + (g.secret ? " secret" : "") + '"><span class="who">' + esc(g.who) + '</span><span class="when">' + g.when + '</span><br>' + esc(g.msg) + (g.re ? '<br><span class="re' + (g.rw ? ' u" data-who="' + esc(g.rw) : "") + '">' + esc(g.re) + '</span>' : "") + '</p>';
+      });
+      h += '</div>' +
+        '<form class="gform" id="gform"><input name="who" maxlength="12" placeholder="이름" autocomplete="off" required><textarea name="msg" maxlength="200" placeholder="남기실 말씀" required></textarea><button class="btn" type="submit">남기기</button>' +
+        '<label class="chk"><input type="checkbox" name="secret"> 비밀글</label>' +
+        '<div class="full">※ 이 공책은 보시는 분 화면에만 남습니다. 새로고침하면 지워집니다.</div></form>';
+      return h;
+    },
+    map: function(){
+      return '<h2 class="serif">오시는 길</h2>' +
+        '<div class="mapbox"><svg viewBox="0 0 520 300" role="img" aria-label="약도">' +
+          '<rect x="1" y="1" width="518" height="298" fill="#fff" stroke="#2a2622"/>' +
+          '<rect x="60" y="24" width="400" height="44" fill="none" stroke="#2a2622" stroke-width="1.5"/>' +
+          '<text x="260" y="51" text-anchor="middle" font-size="13" fill="#2a2622">서울대학교 법학전문대학원 (구 법대)</text>' +
+          '<line x1="260" y1="68" x2="260" y2="122" stroke="#2a2622" stroke-width="10"/><text x="272" y="100" font-size="11" fill="#5d5650">정문</text>' +
+          '<line x1="0" y1="140" x2="520" y2="140" stroke="#2a2622" stroke-width="16"/><line x1="0" y1="140" x2="520" y2="140" stroke="#fff" stroke-width="1" stroke-dasharray="8 8"/>' +
+          '<text x="500" y="168" text-anchor="end" font-size="11" fill="#5d5650">◀ 대박골목 ▶</text>' +
+          '<rect x="40" y="176" width="110" height="58" fill="#fbe9e9" stroke="#b5121b" stroke-width="2"/><text x="95" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#b5121b">대박칼라사진관</text><text x="95" y="220" text-anchor="middle" font-size="10" fill="#b5121b">맨 왼쪽 집</text>' +
+          '<rect x="190" y="176" width="120" height="58" fill="none" stroke="#2a2622"/><text x="250" y="200" text-anchor="middle" font-size="11" fill="#2a2622">서점</text><text x="250" y="218" text-anchor="middle" font-size="9" fill="#5d5650">(구 고시서점)</text>' +
+          '<rect x="350" y="176" width="130" height="58" fill="none" stroke="#2a2622"/><text x="415" y="200" text-anchor="middle" font-size="11" fill="#2a2622">원룸 골목</text><text x="415" y="218" text-anchor="middle" font-size="9" fill="#5d5650">(구 독서실 · 하숙)</text>' +
+          '<rect x="215" y="258" width="90" height="24" rx="12" fill="none" stroke="#2a2622"/><text x="260" y="274" text-anchor="middle" font-size="10" fill="#2a2622">버스 정류장</text>' +
+          '<text x="14" y="288" font-size="9" fill="#5d5650">※ 축척 없음. 골목은 이것보다 좁습니다.</text>' +
+        '</svg></div>' +
+        '<p style="margin-top:12px"><b>주소</b> &nbsp;서울시 관악구 합격동 684 <span class="muted">(대박골목 맨 왼쪽)</span><br><b>전화</b> &nbsp;<span class="red">019-1001-0684</span> <span class="muted">(그대로 거시면 됩니다)</span></p>' +
+        '<p>로스쿨 정문(옛 법대 정문)에서 길 건너 대박골목으로 들어서면 맨 왼쪽 집입니다. 버스 정류장에서 걸어서 2분입니다. 골목 입구 서점 이름이 바뀌었는데 건물은 그대로입니다.</p>' +
+        '<table class="spec"><tr><th>평일</th><td class="c">09:00 ~ 19:00</td></tr><tr><th>토요일</th><td class="c">09:00 ~ 17:00</td></tr><tr><th>일 · 공휴일</th><td class="c">휴무</td></tr></table>' +
+        '<p class="muted" style="margin-top:8px">예약 없이 오셔도 됩니다. 점심시간 직후가 제일 한가합니다. 촬영 마감은 문 닫기 30분 전입니다.</p>';
+    },
+    move: function(){ return PAGES.about(); },
+  };
+
+  /* ── 심심풀이 ── */
+  PAGES.play = function(){
+    return '<h2 class="serif">심심풀이 <small>기다리시는 동안 · 대기 공간 컴퓨터에도 있습니다</small></h2>' +
+      '<div class="gtabs">' +
+        '<button data-g="env">B컷 봉투</button><button data-g="pick">A컷 고르기</button><button data-g="shutter">셔터 타이밍</button><button data-g="memo">B컷 짝 맞추기</button><button data-g="guard">사진 지키기</button>' +
+      '</div><div class="gbox" id="gbox"></div>' +
+      '<p class="muted" style="margin-top:10px">※ 점수는 저장되지 않습니다.</p>';
+  };
+  var G = { timers:[] };
+  function gclear(){ G.timers.forEach(clearTimeout); G.timers = []; if(G.raf) cancelAnimationFrame(G.raf); }
+  function later(f, ms){ var t = setTimeout(f, ms); G.timers.push(t); return t; }
+  function shuffle(a){ for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var LOOKS = [ { hair:"bob", shirt:"pink notie" }, { hair:"side", shirt:"blue" }, { hair:"long", shirt:"stripe notie" }, { hair:"perm", shirt:"green", glasses:true }, { hair:"up", shirt:"dark" }, { hair:"gray", shirt:"suit" } ];
+  var FAULTS = [
+    { p:{ eye:"shut" }, why:"눈을 감으셨습니다." },
+    { p:{ mouth:"laugh", eye:"squint" }, why:"증명사진은 웃으면 안 됩니다." },
+    { p:{ face:"tilt" }, why:"고개가 기울었습니다. 정면을 보셔야 합니다." },
+    { p:{ eye:"side" }, why:"시선이 옆으로 갔습니다." },
+    { p:{ hair:"cap", brow:false }, why:"모자는 안 됩니다. 귀와 눈썹이 보여야 합니다." },
+    { p:{ mouth:"open", eye:"big" }, why:"입이 열렸습니다." },
+    { p:{ blur:true }, why:"흔들렸습니다." },
+    { p:{ strand:true }, why:"머리카락 한 올이 하늘로 갔습니다." }
+  ];
+  function gameSay(t){ var s = document.getElementById("gsay"); if(s) s.innerHTML = t; }
+  var GAMES = {
+    env: function(box){ box.innerHTML = PAGES.bcut(); renderEnv(false); },
+    pick: function(box){
+      var round = 0, score = 0, TOTAL = 5;
+      function next(){
+        if(round >= TOTAL){
+          box.innerHTML = '<div class="gscore"><span>A컷 고르기</span><span>끝</span></div><p class="serif" style="font-size:16px">' + TOTAL + '장 중 ' + score + '장 맞히셨습니다.</p>' +
+            '<div class="say">' + (score === TOTAL ? "다 맞히셨습니다. 여권사진 규정을 다 아시는군요." : score >= 3 ? "잘 보셨습니다." : "사진은 저희가 골라 드리겠습니다.") + '</div>' +
+            '<button class="btn primary" data-g="pick">다시</button>';
+          return;
+        }
+        var look = LOOKS[Math.floor(Math.random() * LOOKS.length)];
+        var faults = shuffle(FAULTS.slice()).slice(0, 3);
+        var opts = faults.map(function(f){ var p = {}; for(var k in look) p[k] = look[k]; for(var k2 in f.p) p[k2] = f.p[k2]; return { p:p, why:f.why }; });
+        opts.push({ p:look, ok:true });
+        shuffle(opts);
+        box.innerHTML = '<div class="gscore"><span>' + (round + 1) + ' / ' + TOTAL + '</span><span>맞힌 장수 ' + score + '</span></div>' +
+          '<p>같은 손님을 네 번 찍었습니다. <b>증명사진으로 쓸 수 있는 한 장</b>을 고르십시오.</p>' +
+          '<div class="pick">' + opts.map(function(o, i){ return '<button type="button" data-i="' + i + '">' + photo(o.p) + 'IMG_' + (1000 + round * 4 + i) + '</button>'; }).join("") + '</div>' +
+          '<div class="say" id="gsay">눈, 입, 고개, 시선, 귀. 다섯 가지를 보십시오.</div>';
+        var locked = false;
+        box.querySelector(".pick").onclick = function(e){
+          var b = e.target.closest("button[data-i]"); if(!b || locked) return; locked = true;
+          var o = opts[parseInt(b.getAttribute("data-i"),10)];
+          Array.prototype.forEach.call(box.querySelectorAll(".pick button"), function(x, i){ x.classList.add(opts[i].ok ? "ok" : "bad"); });
+          if(o.ok){ score++; gameSay("<b>맞습니다.</b> 이 장으로 뽑겠습니다."); } else { gameSay("<b>아닙니다.</b> " + esc(o.why)); }
+          round++; later(next, 1500);
+        };
+      }
+      next();
+    },
+    shutter: function(box){
+      var look = LOOKS[Math.floor(Math.random() * LOOKS.length)];
+      var state = "idle", tCue, tShut, shots = 0, good = 0;
+      function render(msg){
+        box.innerHTML = '<div class="shutter"><div class="gscore"><span>셔터 타이밍</span><span>A컷 ' + good + ' / 촬영 ' + shots + '</span></div>' +
+          '<p>손님이 곧 눈을 깜빡입니다. <b>얼굴에 붉은 테두리가 뜨는 순간</b> 셔터를 누르십시오. 스페이스바도 됩니다.</p>' +
+          '<div class="stage" id="stage">' + photo(look, "big") + '</div>' +
+          '<div><button class="btn primary" id="shot" type="button">셔 터</button></div>' +
+          '<div class="say" id="gsay">' + msg + '</div></div>';
+        document.getElementById("shot").onclick = press;
+      }
+      function arm(){
+        state = "wait";
+        var stage = document.getElementById("stage");
+        var delay = 1200 + Math.random() * 2600;
+        tCue = later(function(){ state = "cue"; stage.classList.add("cue"); stage.querySelectorAll(".eye").forEach(function(e){ e.classList.add("squint"); });
+          tShut = later(function(){ state = "shut"; stage.classList.remove("cue"); stage.querySelectorAll(".eye").forEach(function(e){ e.classList.remove("squint"); e.classList.add("shut"); });
+            later(function(){ if(state === "shut"){ result("late"); } }, 700);
+          }, 380);
+        }, delay);
+      }
+      function press(){
+        if(state === "done") return;
+        if(state === "idle"){ gameSay("손님 앉으셨습니다. 준비하십시오."); arm(); return; }
+        if(state === "wait") return result("early");
+        if(state === "cue") return result("good");
+        if(state === "shut") return result("late");
+      }
+      function result(kind){
+        gclear(); state = "done"; shots++;
+        var p = {}; for(var k in look) p[k] = look[k];
+        var msg;
+        if(kind === "good"){ good++; msg = "<b>A컷.</b> 이 장으로 뽑겠습니다."; }
+        else if(kind === "early"){ p.mouth = ""; p.eye = "big"; p.brow = "up"; msg = "<b>B컷.</b> 너무 빨랐습니다. 표정 준비 전의 진짜 얼굴입니다."; }
+        else { p.eye = "shut"; p.flash = true; msg = "<b>B컷.</b> 눈 감기 0.1초 전. 플래시가 언제나 더 빠릅니다."; }
+        render(msg + ' <button class="btn" id="again" type="button" style="margin-left:8px">다시</button>');
+        document.getElementById("stage").innerHTML = photo(p, "big");
+        document.getElementById("again").onclick = function(){ state = "idle"; look = LOOKS[Math.floor(Math.random() * LOOKS.length)]; render("손님 앉으셨습니다. 셔터를 한 번 눌러 준비하십시오."); };
+      }
+      render("셔터를 한 번 누르면 손님이 앉습니다.");
+      G.key = function(e){ if(e.code === "Space" && document.getElementById("shot")){ e.preventDefault(); press(); } };
+    },
+    memo: function(box){
+      var pairs = shuffle(BCUTS.slice()).slice(0, 6);
+      var cards = shuffle(pairs.concat(pairs).map(function(b, i){ return { b:b, id:i }; }));
+      var open = [], tries = 0, found = 0, lock = false;
+      box.innerHTML = '<div class="gscore"><span>B컷 짝 맞추기</span><span id="mtries">시도 0</span></div><p>같은 B컷 두 장을 찾으십시오. 필름 정리입니다.</p>' +
+        '<div class="memo">' + cards.map(function(c, i){ return '<button type="button" data-c="' + i + '">' + photo(c.b.p) + '</button>'; }).join("") + '</div>' +
+        '<div class="say" id="gsay">봉투에 넣기 전에 짝을 맞춰야 합니다.</div>';
+      var btns = box.querySelectorAll(".memo button");
+      box.querySelector(".memo").onclick = function(e){
+        var b = e.target.closest("button[data-c]"); if(!b || lock || b.classList.contains("up")) return;
+        b.classList.add("up"); open.push(b);
+        if(open.length < 2) return;
+        tries++; document.getElementById("mtries").textContent = "시도 " + tries; lock = true;
+        var a = cards[parseInt(open[0].getAttribute("data-c"),10)], c = cards[parseInt(open[1].getAttribute("data-c"),10)];
+        if(a.b === c.b){ open.forEach(function(x){ x.classList.add("done"); }); open = []; lock = false; found++;
+          gameSay("<b>" + esc(a.b.t) + "</b> 두 장. 봉투에 넣었습니다.");
+          if(found === 6) gameSay("<b>다 맞췄습니다.</b> " + tries + "번 만에 정리했습니다." + ' <button class="btn" data-g="memo" type="button">다시</button>');
+        } else { later(function(){ open.forEach(function(x){ x.classList.remove("up"); }); open = []; lock = false; }, 700); gameSay("다릅니다. 잘 보십시오."); }
+      };
+    },
+    guard: function(box){
+      var left = 30, blocked = 0, stolen = 0, alive = true;
+      box.innerHTML = '<div class="gscore"><span>사진 지키기</span><span><span id="gt">30</span>초 · 막음 <span id="gb">0</span> · 뜯김 <span id="gs">0</span></span></div>' +
+        '<p>벽에 걸린 사진을 노리는 손이 옵니다. <b>손을 누르면</b> 쫓아냅니다. 못 막으면 뜯깁니다.</p>' +
+        '<div class="guard" id="guard"><div class="fr gold"><div class="screw tl"></div><div class="screw tr"></div>' + photo(JUHAN, "big sepia") + '<div class="empty">(사진 없음)</div><small>1997 · 차주한 · 동차합격</small></div></div>' +
+        '<div class="say" id="gsay">30초만 지켜 주십시오.</div>';
+      var g = document.getElementById("guard"), fr = g.querySelector(".fr");
+      function tick(){ if(!alive) return; left--; document.getElementById("gt").textContent = left; if(left <= 0){ end(); return; } later(tick, 1000); }
+      function spawn(){
+        if(!alive) return;
+        var h = document.createElement("div"); var side = Math.random() < .5 ? "l" : "r";
+        h.className = "hand " + side; h.innerHTML = '<div class="arm"></div><div class="palm"></div>';
+        h.style.top = (60 + Math.random() * 150) + "px";
+        h.style[side === "l" ? "left" : "right"] = "-10px";
+        var start = performance.now(), dur = 900 + Math.random() * 600, dist = (g.clientWidth / 2) - 110;
+        h.onclick = function(){ if(h.dataset.done) return; h.dataset.done = 1; blocked++; document.getElementById("gb").textContent = blocked; h.classList.add("hit"); gameSay(["쫓아냈습니다.", "파는 물건이 아닙니다.", "떼 가서도 안 됩니다.", "공부하러 가십시오."][blocked % 4]); later(function(){ h.remove(); }, 300); };
+        g.appendChild(h);
+        (function move(){ if(!alive || h.dataset.done) return; var t = Math.min(1, (performance.now() - start) / dur); h.style.transform = (side === "r" ? "scaleX(-1) " : "") + "translateX(" + (t * dist) + "px)";
+          if(t < 1){ G.raf = requestAnimationFrame(move); } else { h.dataset.done = 1; stolen++; document.getElementById("gs").textContent = stolen; fr.classList.add("gone"); gameSay("<b>뜯겼습니다.</b>"); later(function(){ h.remove(); fr.classList.remove("gone"); gameSay("돌아왔습니다. 항상 돌아옵니다."); }, 1200); } })();
+        later(spawn, 700 + Math.random() * 900);
+      }
+      function end(){ alive = false; gclear(); g.querySelectorAll(".hand").forEach(function(x){ x.remove(); });
+        gameSay("<b>끝.</b> 막음 " + blocked + ", 뜯김 " + stolen + ". " + (stolen === 0 ? "한 장도 안 뜯겼습니다. 고맙습니다." : stolen < 3 ? "그만하면 됐습니다." : "그래서 나사를 박았습니다.") + ' <button class="btn" data-g="guard" type="button">다시</button>'); }
+      later(tick, 1000); later(spawn, 600);
+    }
+  };
+  function startGame(name){
+    gclear(); G.key = null;
+    var box = document.getElementById("gbox"); if(!box) return;
+    Array.prototype.forEach.call(document.querySelectorAll(".gtabs button"), function(b){ b.classList.toggle("on", b.getAttribute("data-g") === name); });
+    GAMES[name](box);
+  }
+  document.addEventListener("keydown", function(e){ if(G.key) G.key(e); });
+
+  /* ── 봉투 동작 ── */
+  function renderEnv(open){
+    var b = BCUTS[bi];
+    var card = document.getElementById("envCard"), cap = document.getElementById("envCap"), env = document.getElementById("env");
+    if(!card) return;
+    card.innerHTML = photo(b.p, "big") + '<div class="stamp">B컷</div><small>' + esc(b.file) + '</small>';
+    cap.innerHTML = '<b class="serif">' + esc(b.t) + '</b>' + esc(b.c) + '<div class="muted">' + (bi + 1) + ' / ' + BCUTS.length + '</div>';
+    env.classList.toggle("open", !!open);
+    var th = document.getElementById("thumbs");
+    th.innerHTML = BCUTS.map(function(x, i){ return '<button type="button" class="' + (i === bi ? "on" : "") + '" data-bi="' + i + '" title="' + esc(x.t) + '">' + photo(x.p) + '</button>'; }).join("");
+  }
+  function swapEnv(i){
+    var env = document.getElementById("env");
+    env.classList.remove("open");
+    setTimeout(function(){ bi = (i + BCUTS.length) % BCUTS.length; renderEnv(false); setTimeout(function(){ env.classList.add("open"); }, 80); }, 450);
+  }
+
+  /* ── 라우팅 ── */
+  var main = document.getElementById("main"), nav = document.getElementById("nav");
+  var ALIAS = { spec:"guide", film:"guide", restore:"guide", move:"about", bcut:"play" };
+  function go(p, arg){
+    p = ALIAS[p] || p;
+    main.innerHTML = PAGES[p] ? PAGES[p](arg) : PAGES.home();
+    Array.prototype.forEach.call(nav.querySelectorAll("button"), function(b){ b.classList.toggle("on", b.getAttribute("data-page") === p); });
+    var hash = "#" + p + (arg ? "/" + arg : "");
+    if(location.hash !== hash) history.replaceState(null, "", hash);
+    gclear(); G.key = null;
+    if(p === "play") startGame("env");
+    if(window.innerWidth < 640 && dr.style.display === "none") main.scrollIntoView({ block:"start" }); else window.scrollTo(0, 0);
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target.closest("[data-page],[data-post],[data-old],[data-bi],[data-g],#envPrev,#envNext");
+    if(!t) return;
+    if(t.hasAttribute("data-g")){ startGame(t.getAttribute("data-g")); return; }
+    if(t.hasAttribute("data-old")){ e.preventDefault(); location.href = OLD_SITE; return; }
+    if(t.hasAttribute("data-page")){ e.preventDefault(); go(t.getAttribute("data-page")); return; }
+    if(t.hasAttribute("data-post")){ e.preventDefault(); go("post", t.getAttribute("data-post")); return; }
+    if(t.hasAttribute("data-bi")){ swapEnv(parseInt(t.getAttribute("data-bi"),10)); return; }
+    if(t.id === "envPrev"){ swapEnv(bi - 1); return; }
+    if(t.id === "envNext"){ var env = document.getElementById("env"); if(env.classList.contains("open")) swapEnv(bi + 1); else { renderEnv(false); void env.offsetWidth; setTimeout(function(){ env.classList.add("open"); }, 50); } return; }
+  });
+  document.addEventListener("submit", function(e){
+    if(e.target.id !== "gform") return;
+    e.preventDefault();
+    var f = e.target, who = f.who.value.trim().slice(0,12), msg = f.msg.value.trim().slice(0,200);
+    if(!who || !msg) return;
+    GUEST.unshift({ who:who, when:"10.08.19", msg: f.secret.checked ? "비밀글입니다. 사장만 볼 수 있습니다." : msg, secret:f.secret.checked });
+    go("guest");
+    toast(f.secret.checked ? "비밀글로 남겼습니다. 사장이 봅니다." : "공책에 남겼습니다. 고맙습니다.");
+  });
+
+
+  var toastEl = document.getElementById("toast"), toastT;
+  function toast(m){ toastEl.textContent = m; toastEl.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove("on"); }, 2600); }
+
+  function fromHash(){
+    var h = location.hash.replace("#","").split("/");
+    if(h[0] === "post" && h[1]) go("post", h[1]); else if(PAGES[h[0]]) go(h[0]); else go("home");
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+})();
+</script>
+<script data-goatcounter="https://pencilprism.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
