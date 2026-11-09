@@ -129,6 +129,26 @@ footer p{margin:4px 0}
 .stamp-img{display:inline-block;opacity:0;transform:translateY(-50%) scale(1.8) rotate(-12deg);transition:opacity .25s ease-out,transform .25s ease-out}
 .stamp-img.on{opacity:.88;transform:translateY(-50%) rotate(-4deg)}
 #tools{display:none}
+/* PDF pages (off-screen) */
+#pdfHost{position:fixed;left:-10000px;top:0}
+.pg{width:794px;height:1123px;background:#fff;position:relative;padding:70px 78px 0;box-sizing:border-box;font-family:var(--serif);color:#111;font-size:15px;line-height:1.95}
+.pg .body{height:850px;overflow:hidden}
+.pg .c1{text-align:center;font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:.5em;padding-left:.5em;line-height:1.6}
+.pg .c2{text-align:center;font-family:var(--serif);font-weight:700;font-size:34px;letter-spacing:1.1em;padding-left:1.1em;margin:14px 0 22px}
+.pg table{border-collapse:collapse;margin:0 0 10px 0}
+.pg th{text-align:justify;text-align-last:justify;width:5.2em;font-weight:400;padding:3px 34px 3px 0;vertical-align:top}
+.pg td{padding:3px 0}
+.pg hr{border:0;border-top:1px solid #222;margin:14px 0 20px}
+.pg h3{text-align:center;font-size:18px;font-weight:700;letter-spacing:1.2em;padding-left:1.2em;margin:26px 0 14px}
+.pg p{margin:0 0 12px;text-align:justify}
+.pg .sg{margin-top:22px;border-top:1px solid #222;padding-top:18px}
+.pg .sg .d{text-align:center;margin-bottom:20px}
+.pg .sg .w{text-align:right;line-height:2}
+.pg .sg .w b{font-family:var(--sans);position:relative;display:inline-block}
+.pg .sg .w img{position:absolute;right:-12px;top:50%;width:64px;transform:translateY(-50%) rotate(-4deg);opacity:.88;mix-blend-mode:multiply}
+.pg .box{position:absolute;left:78px;right:78px;bottom:78px;border:1px solid #222;padding:8px 12px;font-family:var(--sans);font-size:11.5px;line-height:1.65;color:#222}
+.pg .num{position:absolute;left:0;right:0;bottom:44px;text-align:center;font-family:var(--sans);font-size:12px;color:#333}
+
 </style>
 </head>
 <body>
@@ -196,7 +216,7 @@ footer p{margin:4px 0}
       </div>
     </article>
     <div class="actions" id="tools" style="justify-content:center;margin:20px 0 4px">
-      <button class="btn" type="button" id="save">판결서 저장</button>
+      <button class="btn" type="button" id="save">판결서 PDF 내려받기</button>
       <button class="btn ghost" type="button" onclick="window.print()">인쇄하기</button>
       <button class="btn ghost" type="button" id="share">링크 복사</button>
       <button class="btn ghost" type="button" id="again">다시 선고</button>
@@ -211,7 +231,9 @@ footer p{margin:4px 0}
   <p>© 도서출판 연필</p>
 </footer>
 
+<div id="pdfHost" aria-hidden="true"></div>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 (function(){
   const $ = id => document.getElementById(id);
@@ -255,13 +277,50 @@ footer p{margin:4px 0}
       .then(()=>{ $('share').textContent='복사됨'; setTimeout(()=>$('share').textContent='링크 복사',1500); })
       .catch(()=>prompt('주소를 복사하세요',url));
   };
-  $('save').onclick=()=>{
-    if(!window.html2canvas){ window.print(); return; }
-    html2canvas($('doc'),{scale:2,backgroundColor:'#ffffff',useCORS:true}).then(c=>{
-      const a=document.createElement('a');
-      a.download='연필지방법원_판결서_'+$('defName').textContent+'.png';
-      a.href=c.toDataURL('image/png'); a.click();
-    });
+  const NOTE='※ 이 판결서는 연필지방법원 독자참여재판부가 「너희들은 변호됐다」 2부 주문 마감일을 기념하여 발부한 것입니다. 이 판결은 선고와 함께 확정되었으며, 불복은 2부를 읽고 남겨 주시는 서평으로 갈음합니다.';
+  function esc(t){ return t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+  function blocks(){
+    const b=[];
+    b.push('<div class="c1">연 필 지 방 법 원</div><div class="c1">독 자 참 여 재 판 부</div><div class="c2">판결</div>');
+    b.push(document.querySelector('#doc table.meta').outerHTML.replace('class="meta"','').replace('<br>','　'));
+    b.push('<hr>');
+    b.push('<h3>주문</h3><p>'+esc($('order').textContent)+'</p>');
+    const rs=[...document.querySelectorAll('#reason p')].map(p=>'<p>'+esc(p.textContent)+'</p>');
+    b.push('<h3>이유</h3>'+rs[0]); rs.slice(1).forEach(x=>b.push(x));
+    b.push('<div class="sg"><div class="d">2026. 11. 9.</div><div class="w"><b>연필지방법원 독자참여재판부<img src="/together/assets/seal-judgment.png" alt=""></b><br>연필 드림</div></div>');
+    return b;
+  }
+  function newPage(host){
+    const pg=document.createElement('div'); pg.className='pg';
+    pg.innerHTML='<div class="body"></div><div class="box">'+NOTE+'</div><div class="num"></div>';
+    host.appendChild(pg); return pg;
+  }
+  async function makePdf(){
+    const host=$('pdfHost'); host.innerHTML='';
+    let pg=newPage(host), body=pg.querySelector('.body');
+    for(const h of blocks()){
+      const w=document.createElement('div'); w.innerHTML=h; body.appendChild(w);
+      if(body.scrollHeight>body.clientHeight && body.children.length>1){
+        body.removeChild(w); pg=newPage(host); body=pg.querySelector('.body'); body.appendChild(w);
+      }
+    }
+    const pages=[...host.querySelectorAll('.pg')];
+    pages.forEach((p,i)=>p.querySelector('.num').textContent=(i+1)+' / '+pages.length);
+    await document.fonts.ready;
+    const pdf=new window.jspdf.jsPDF({unit:'pt',format:'a4'});
+    for(let i=0;i<pages.length;i++){
+      const c=await html2canvas(pages[i],{scale:2,backgroundColor:'#ffffff',useCORS:true});
+      if(i) pdf.addPage();
+      pdf.addImage(c.toDataURL('image/jpeg',0.92),'JPEG',0,0,595.28,841.89);
+    }
+    pdf.save('2026독참119_판결서_'+$('defName').textContent+'.pdf');
+    host.innerHTML='';
+  }
+  $('save').onclick=async()=>{
+    if(!window.html2canvas||!window.jspdf){ window.print(); return; }
+    const b=$('save'), t=b.textContent; b.textContent='판결서 발부 중…'; b.disabled=true;
+    try{ await makePdf(); } catch(e){ console.error(e); window.print(); }
+    b.textContent=t; b.disabled=false;
   };
   let q=null; try{ q=new URLSearchParams(location.search).get('n'); }catch(_){}
   if(q){ $('name').value=q; render(q); }
