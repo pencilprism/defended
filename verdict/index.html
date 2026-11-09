@@ -143,9 +143,9 @@ footer p{margin:4px 0}
 .pg p{margin:0 0 12px;text-align:justify}
 .pg .sg{margin-top:22px;border-top:1px solid #222;padding-top:18px}
 .pg .sg .d{text-align:center;margin-bottom:20px}
-.pg .sg .w{text-align:right;line-height:2}
-.pg .sg .w b{font-family:var(--sans);position:relative;display:inline-block}
-.pg .sg .w img{position:absolute;right:-12px;top:50%;width:64px;transform:translateY(-50%) rotate(-4deg);opacity:.88;mix-blend-mode:multiply}
+.pg .sg .w{text-align:right;line-height:2;position:relative;padding-right:26px}
+.pg .sg .w b{font-family:var(--sans);font-weight:700}
+.pg .sg .w img{position:absolute;right:0;top:-8px;width:68px;height:auto;opacity:.8}
 .pg .box{position:absolute;left:78px;right:78px;bottom:78px;border:1px solid #222;padding:8px 12px;font-family:var(--sans);font-size:11.5px;line-height:1.65;color:#222}
 .pg .num{position:absolute;left:0;right:0;bottom:44px;text-align:center;font-family:var(--sans);font-size:12px;color:#333}
 
@@ -282,12 +282,12 @@ footer p{margin:4px 0}
   function blocks(){
     const b=[];
     b.push('<div class="c1">연 필 지 방 법 원</div><div class="c1">독 자 참 여 재 판 부</div><div class="c2">판결</div>');
-    b.push(document.querySelector('#doc table.meta').outerHTML.replace('class="meta"','').replace('<br>','　'));
+    b.push(document.querySelector('#doc table.meta').outerHTML.replace('class="meta"','').replace('<br>','&nbsp;&nbsp;&nbsp;'));
     b.push('<hr>');
     b.push('<h3>주문</h3><p>'+esc($('order').textContent)+'</p>');
     const rs=[...document.querySelectorAll('#reason p')].map(p=>'<p>'+esc(p.textContent)+'</p>');
     b.push('<h3>이유</h3>'+rs[0]); rs.slice(1).forEach(x=>b.push(x));
-    b.push('<div class="sg"><div class="d">2026. 11. 9.</div><div class="w"><b>연필지방법원 독자참여재판부<img src="/together/assets/seal-judgment.png" alt=""></b><br>연필 드림</div></div>');
+    b.push('<div class="sg"><div class="d">2026. 11. 9.</div><div class="w"><b>연필지방법원 독자참여재판부</b><br>연필 드림<img src="/together/assets/seal-judgment.png" alt=""></div></div>');
     return b;
   }
   function newPage(host){
